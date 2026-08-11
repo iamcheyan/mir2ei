@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>术语表 · EI 传奇3.0 百科</title>
+<style>
+:root {
+  --bg:#0d1117; --panel:#151e28; --line:#2a3a49; --fg:#e7eef5;
+  --dim:#9eafbf; --acc:#e7b76c; --ac2:#78d5cc; --good:#8bd3a6; --bad:#f18b82;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--fg); font:15px/1.6 "PingFang SC","Microsoft YaHei",system-ui,sans-serif; }
+a { color:var(--ac2); text-decoration:none; } a:hover { text-decoration:underline; }
+header { position:sticky; top:0; z-index:50; background:rgba(18,20,23,.97); border-bottom:1px solid var(--line); }
+nav { display:flex; flex-wrap:wrap; gap:2px 14px; padding:10px 18px; max-width:1280px; margin:0 auto; }
+nav a { padding:4px 8px; border-radius:6px; color:var(--fg); font-size:14px; }
+nav a:hover { background:var(--panel); text-decoration:none; }
+nav a.active { color:var(--acc); font-weight:700; }
+main { max-width:1280px; margin:0 auto; padding:20px 18px 80px; }
+h1 { font-size:24px; margin:6px 0 16px; }
+h2 { font-size:19px; margin:24px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+.lead { color:var(--dim); margin-bottom:18px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+.card a { color:var(--fg); display:block; padding:10px 12px; }
+.card a:hover { background:rgba(255,255,255,.03); text-decoration:none; }
+.card .thumb { width:100%; aspect-ratio:16/10; object-fit:cover; background:#0d0f12; display:block; }
+.card .name { font-weight:600; }
+.card .sub { color:var(--dim); font-size:12.5px; margin-top:2px; }
+.card .sub .avatar { width:34px; height:34px; object-fit:contain; vertical-align:-10px; margin-right:8px; background:#0d0f12; border-radius:6px; }
+.card .sub .avatar.noimg { width:34px; height:34px; display:inline-block; vertical-align:-10px; margin-right:8px; }
+.tag { display:inline-block; font-size:11px; padding:1px 7px; border-radius:9px; margin-left:6px; vertical-align:1px; }
+.tag-ei { background:#5a2d2d; color:#ff9d9d; }
+.tag-mei { background:#2d3a5a; color:#9db8ff; }
+.tag-zir { background:#3a2d5a; color:#d0b3ff; }
+.tag-mud3 { background:#2d5a3a; color:#a8f0c0; }
+.tag-legacy { background:#5a4a2d; color:#ffd98d; }
+.icon { width:64px; height:64px; object-fit:contain; background:#0d0f12; border-radius:8px; }
+.noimg { background:#0d0f12; border-radius:8px; }
+.card .pic { width:100%; height:118px; object-fit:contain; background:#0d0f12; padding:8px; display:block; }
+.card .noimg.pic { height:118px; }
+.detail .bigpic { width:150px; height:150px; object-fit:contain; background:#0d0f12; border-radius:10px; }
+.detail .noimg.bigpic { width:150px; height:150px; }
+table img.icon { width:44px; height:44px; }
+.none { color:var(--dim); font-style:italic; }
+.badge { display:inline-block; font-size:11px; padding:1px 8px; border-radius:9px; margin:2px 4px 2px 0; background:#263040; color:#c9d6ea; }
+table { border-collapse:collapse; width:100%; margin:8px 0; }
+th,td { border:1px solid var(--line); padding:6px 10px; text-align:left; font-size:14px; }
+th { background:#20242c; color:var(--dim); font-weight:600; }
+tr:nth-child(even) td { background:rgba(255,255,255,.015); }
+.filters { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 16px; }
+.filters input,.filters select { background:var(--panel); border:1px solid var(--line); color:var(--fg);
+  border-radius:8px; padding:6px 10px; font-size:14px; }
+.filters button { background:#2b3547; color:var(--fg); border:none; border-radius:8px; padding:6px 14px;
+  cursor:pointer; font-size:14px; } .filters button:hover { background:#35435c; }
+.csel { position:relative; display:inline-block; }
+.csel-btn { background:var(--panel); border:1px solid var(--line); color:var(--fg); padding:6px 12px;
+  border-radius:8px; font-size:14px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; min-width:108px; }
+.csel-btn:hover { border-color:var(--acc); }
+.csel-btn .arrow { color:var(--dim); font-size:10px; }
+.csel-menu { display:none; position:absolute; z-index:60; top:calc(100% + 4px); left:0; min-width:150px;
+  max-height:280px; overflow-y:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  box-shadow:0 10px 28px rgba(0,0,0,.5); list-style:none; margin:0; padding:4px 0; }
+.csel.open .csel-menu { display:block; }
+.csel.open .csel-btn { border-color:var(--acc); }
+.csel-menu li a { display:block; padding:6px 12px; color:var(--fg); font-size:13.5px; text-decoration:none;
+  white-space:nowrap; }
+.csel-menu li a:hover { background:#1b2631; }
+.csel-menu li[aria-current="true"] a { color:var(--acc); font-weight:700; background:#16202a; }
+.chip { display:inline-flex; align-items:center; gap:5px; background:var(--panel); border:1px solid var(--line);
+  border-radius:16px; padding:3px 11px 3px 8px; cursor:pointer; font-size:13.5px; user-select:none; }
+.chip input { accent-color:var(--acc); cursor:pointer; }
+.chip:has(input:checked) { border-color:var(--acc); background:#2b2a1f; color:var(--acc); }
+.chip a { color:var(--fg); text-decoration:none; }
+.chip a:hover { color:var(--acc); }
+.chip.on { border-color:var(--acc); background:#2b2a1f; color:var(--acc); }
+.chips { margin:10px 0 18px; display:flex; flex-wrap:wrap; gap:7px; }
+.store-sec { margin:22px 0; padding:14px 16px; background:var(--panel); border:1px solid var(--line); border-radius:12px; }
+.store-sec h2 { margin:0 0 6px; font-size:17px; }
+.store-sec .sub { color:var(--dim); font-size:13px; margin-bottom:10px; }
+.store-goods { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; align-items:center; }
+.sgood { display:flex; flex-direction:column; align-items:center; gap:2px; text-decoration:none; }
+.sgood .thumb { width:52px; height:52px; object-fit:contain; background:#0d0f12; border:1px solid var(--line); border-radius:6px; padding:2px; }
+.sgood:hover .thumb { border-color:var(--acc); }
+.sgood .sprice { color:var(--dim); font-size:11px; }
+.more { color:var(--dim); font-size:12.5px; padding-left:4px; }
+.store-head { display:flex; align-items:baseline; gap:8px; }
+.store-npc { display:flex; gap:12px; align-items:center; margin-top:10px; padding:10px 12px; background:#0d0f12; border:1px solid var(--line); border-radius:10px; }
+.store-npc .npc-avatar { flex:0 0 auto; }
+.store-npc .npc-avatar .avatar { width:56px; height:56px; object-fit:contain; background:#0d0f12; border-radius:8px; border:1px solid var(--line); }
+.store-npc .npc-avatar .avatar.noimg { width:56px; height:56px; display:block; }
+.store-npc .npc-avatar:hover .avatar { border-color:var(--acc); }
+.store-npc .npc-info { min-width:0; }
+.store-npc .npc-name { font-weight:600; color:var(--fg); text-decoration:none; }
+.store-npc .npc-name:hover { color:var(--acc); text-decoration:underline; }
+.store-npc .npc-pos { color:var(--dim); font-size:12px; margin:2px 0 6px; }
+.store-npc .npc-btns { display:flex; gap:6px; }
+.store-npc .btn { display:inline-block; font-size:12px; padding:2px 10px; border:1px solid var(--line); border-radius:6px; color:var(--ac2); text-decoration:none; background:var(--panel); }
+.store-npc .btn:hover { border-color:var(--acc); color:var(--acc); }
+.crumbs { color:var(--dim); font-size:13px; margin-bottom:6px; }
+.crumbs a { color:var(--ac2); }
+.panel-npc { display:flex; gap:14px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:12px 0 20px; }
+.panel-npc .pic { width:64px; height:64px; object-fit:contain; background:#0d0f12; border-radius:8px; }
+.panel-npc .noimg.pic { width:64px; height:64px; }
+.npc-dlg { border-left:3px solid var(--ac2); padding:6px 0 6px 14px; margin:10px 0; }
+.npc-dlg-head { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:4px; }
+.npc-say { white-space:pre-wrap; background:#0d0f12; border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin:4px 0; color:var(--fg); font-size:13px; }
+.npc-btn { color:var(--ac2); font-size:12.5px; margin:2px 0; }
+.chip-dim { color:var(--dim); border-color:var(--line); }
+.chip-act { color:#c9a227; border-color:#c9a22766; }
+.chip-type { color:#7bb26a; border-color:#7bb26a66; }
+.pager { display:flex; align-items:center; justify-content:center; gap:8px; margin:34px 0; flex-wrap:wrap; }
+.pager .pg { display:inline-block; min-width:32px; text-align:center; padding:5px 9px; border:1px solid var(--line);
+  border-radius:7px; background:var(--panel); color:var(--fg); font-size:13.5px; transition:border-color .15s, background .15s; }
+.pager .pg:hover { border-color:var(--acc); background:#1b2631; text-decoration:none; }
+.pager .pg.on { background:var(--acc); color:#1a1408; border-color:var(--acc); font-weight:700; }
+.pager .pg.dots { border:none; background:none; min-width:auto; color:var(--dim); }
+.pager-info { font-size:13.5px; color:var(--dim); margin:0 4px; }
+.pager-info b { color:var(--acc); font-size:14.5px; }
+.pager .pg-go { padding:5px 10px; border:1px solid var(--line); border-radius:7px; background:var(--panel);
+  color:var(--fg); font-size:13.5px; cursor:pointer; max-width:120px; }
+.pager .pg-go:hover { border-color:var(--acc); }
+.anim { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px; }
+.anim-stage { display:flex; align-items:center; justify-content:center; min-height:150px; background:#0d0f12;
+  border:1px solid var(--line); border-radius:8px; margin-bottom:8px; overflow:hidden; }
+.anim-stage img { display:block; max-width:100%; height:auto; image-rendering:pixelated; }
+.anim-ctrl { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.anim-ctrl button { padding:5px 16px; border:1px solid var(--acc); background:var(--acc); color:#1a1408;
+  border-radius:7px; font-size:14px; font-weight:700; cursor:pointer; }
+.anim-ctrl button:hover { filter:brightness(1.1); }
+.anim-ctrl button:disabled { opacity:.5; cursor:default; }
+.mon-anim { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px; margin:14px 0; }
+.mon-anim .anim-stage { min-height:180px; }
+.mon-btns { display:flex; gap:6px; flex-wrap:wrap; }
+.mon-btns button { padding:5px 14px; border:1px solid var(--line); background:transparent; color:var(--fg);
+  border-radius:7px; cursor:pointer; font-size:13.5px; }
+.mon-btns button:hover { border-color:var(--acc); }
+.mon-btns button.on { background:var(--acc); color:#1a1408; border-color:var(--acc); font-weight:700; }
+.mon-speed { display:inline-flex; gap:2px; border:1px solid var(--line); border-radius:7px; overflow:hidden; }
+.mon-speed .spd { padding:4px 12px; border:none; background:transparent; color:var(--dim); font-size:12.5px;
+  cursor:pointer; border-radius:0; }
+.mon-speed .spd:hover { color:var(--fg); background:#1b2631; }
+.mon-speed .spd.on { background:var(--acc); color:#1a1408; font-weight:700; }
+#monPlay { padding:5px 16px; border:1px solid var(--acc); background:var(--acc); color:#1a1408;
+  border-radius:7px; font-size:14px; font-weight:700; cursor:pointer; }
+#monPlay:hover { filter:brightness(1.1); }
+#monPlay:disabled { opacity:.45; cursor:not-allowed; }
+.pager .pg-jump { position:relative; display:inline-block; }
+.pager .pg-jump button { padding:5px 12px; border:1px solid var(--line); border-radius:7px; background:var(--panel);
+  color:var(--fg); font-size:13.5px; cursor:pointer; min-width:96px; text-align:left; }
+.pager .pg-jump button:hover { border-color:var(--acc); }
+.pager .pg-jump .arrow { float:right; color:var(--dim); }
+.pager .pg-jump .menu { display:none; position:absolute; z-index:50; bottom:calc(100% + 6px); left:0;
+  max-height:240px; overflow-y:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.45); min-width:140px; }
+.pager .pg-jump.open .menu { display:block; }
+.pager .pg-jump .menu a { display:block; padding:5px 12px; color:var(--fg); font-size:13.5px; text-decoration:none; }
+.pager .pg-jump .menu a:hover { background:#1b2631; }
+.pager .pg-jump .menu a.on { background:var(--acc); color:#1a1408; font-weight:700; }
+.pager .pg-jump .menu a.cur { color:var(--acc); font-weight:700; background:#16202a; }
+.mapnet { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+.mapnet a { background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:7px 12px;
+  font-size:13.5px; color:var(--fg); }
+.mapnet a:hover { border-color:var(--acc); text-decoration:none; }
+.mapnet a .dim { display:block; font-size:11.5px; }
+.stat { display:inline-block; background:var(--panel); border:1px solid var(--line); border-radius:10px;
+  padding:10px 16px; margin:0 10px 10px 0; text-align:center; min-width:110px; }
+.stat b { display:block; font-size:22px; color:var(--acc); }
+.stat span { font-size:12px; color:var(--dim); }
+.detail { display:flex; gap:24px; flex-wrap:wrap; margin:14px 0 26px; }
+.detail img { border:1px solid var(--line); border-radius:10px; max-width:480px; background:#0d0f12; }
+.meta { flex:1; min-width:280px; }
+.kv { display:grid; grid-template-columns:110px 1fr; gap:4px 12px; font-size:14px; }
+.kv dt { color:var(--dim); }
+.grid3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; }
+.grid4 { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+.dim { color:var(--dim); }
+.panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+.panel h3 { font-size:15px; margin-bottom:6px; }
+.mono { font-family:ui-monospace,Consolas,monospace; font-size:13px; color:var(--dim); }
+.good { color:var(--good); } .bad { color:var(--bad); }
+.bad-undead { display:inline-block; font-size:11px; padding:1px 7px; border-radius:9px; margin-left:4px; background:#3d2f2f; color:#ffb0b0; }
+.bad-tame { display:inline-block; font-size:11px; padding:1px 7px; border-radius:9px; margin-left:4px; background:#2f3d30; color:#b0ffb0; }
+footer { max-width:1280px; margin:0 auto; padding:8px 18px 30px; color:var(--dim); font-size:12.5px; }
+</style>
+<script>
+// 自定义分页跳页: 点按钮弹页码菜单, 点外部关闭
+function pgJumpToggle(e) {
+  var w = document.getElementById('pgJump');
+  if (!w) return;
+  var open = w.classList.toggle('open');
+  w.querySelector('button').setAttribute('aria-expanded', open ? 'true' : 'false');
+  e.stopPropagation();
+}
+document.addEventListener('click', function (e) {
+  var w = document.getElementById('pgJump');
+  if (w && !w.contains(e.target)) w.classList.remove('open');
+});
+// 自定义下拉: 点按钮开合, 点选项写入隐藏 input + 提交表单 (或跳转)
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('.csel-btn');
+  if (btn) {
+    var sel = btn.parentElement;
+    var open = sel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    e.stopPropagation();
+    return;
+  }
+  var li = e.target.closest('.csel li');
+  if (li) {
+    e.preventDefault();
+    var sel = li.closest('.csel');
+    var name = sel.dataset.name, v = li.dataset.v;
+    sel.dataset.cur = v;
+    sel.querySelector('.csel-txt').textContent = li.textContent.trim();
+    Array.prototype.forEach.call(sel.querySelectorAll('li'), function (x) {
+      x.removeAttribute('aria-current');
+    });
+    li.setAttribute('aria-current', 'true');
+    sel.classList.remove('open');
+    sel.querySelector('.csel-btn').setAttribute('aria-expanded', 'false');
+    // 写隐藏 input 并提交所在表单
+    var f = sel.closest('form');
+    if (f) {
+      var h = f.querySelector('input[type=hidden][name="' + name + '"]');
+      if (!h) {
+        h = document.createElement('input'); h.type = 'hidden'; h.name = name;
+        f.appendChild(h);
+      }
+      h.value = v;
+      f.submit();
+    }
+    return;
+  }
+  var s = e.target.closest('.csel');
+  if (s) { s.classList.remove('open'); s.querySelector('.csel-btn').setAttribute('aria-expanded', 'false'); }
+});
+// 筛选即时生效: select/checkbox/radio 变化即提交; 文本输入 500ms 防抖。保留提交按钮。
+document.addEventListener('DOMContentLoaded', function () {
+  var f = document.getElementById('filters');
+  if (!f) return;
+  var t = null;
+  f.addEventListener('change', function (e) {
+    if (e.target.matches('select, input[type=checkbox], input[type=radio]')) f.submit();
+  });
+  f.addEventListener('input', function (e) {
+    if (e.target.matches('input.q, input[name=q]')) {
+      clearTimeout(t);
+      t = setTimeout(function () { f.submit(); }, 500);
+    }
+  });
+});
+// 施法动画播放: 点击 ▶ 后逐帧切换, 循环; 再点暂停。
+var _animTimer = null;
+function animPlay(btn) {
+  var box = btn.closest('.anim');
+  var img = box.querySelector('#animFrame');
+  var n = parseInt(box.dataset.frames, 10) || 1;
+  var delay = parseInt(box.dataset.delay, 10) || 100;
+  var idx = parseInt(box.dataset.i || '0', 10);
+  if (btn.dataset.on === '1') {
+    btn.dataset.on = '0'; btn.textContent = '▶ 播放';
+    clearInterval(_animTimer); _animTimer = null;
+    return;
+  }
+  btn.dataset.on = '1'; btn.textContent = '⏸ 暂停';
+  var step = function () {
+    img.src = '/img/skills_anim/' + box.dataset.sid + '/' + String(idx).padStart(3, '0') + '.png';
+    box.dataset.i = idx;
+    var l = box.querySelector('#animIdx');
+    if (l) l.textContent = idx + 1;
+    idx = (idx + 1) % n;
+  };
+  step();
+  clearInterval(_animTimer);
+  _animTimer = setInterval(step, delay);
+}
+var _monTimer = null, _monDir = 0, _monIdx = 0, _monSpeed = 1;
+var MON_ACT_ZH = { standing: '站立', walking: '行走', combat: '攻击', struck: '受击', die: '死亡' };
+function monStop() {
+  clearInterval(_monTimer); _monTimer = null;
+  var pb = document.getElementById('monPlay');
+  if (pb) { pb.dataset.on = '0'; pb.textContent = '▶ 播放'; }
+}
+function monDirs(act) { return (window.MON_ANIM && window.MON_ANIM[act]) || []; }
+function monShow() {
+  var img = document.getElementById('monFrame');
+  var dirs = monDirs(img.dataset.act);
+  var d = dirs[_monDir];
+  img.src = '/img/mon_anim/' + img.dataset.mid + '/' + img.dataset.act + '/' + d.d + '/' + String(_monIdx).padStart(3, '0') + '.png';
+  document.getElementById('monDir').textContent = d.zh;
+  document.getElementById('monDirIdx').textContent = (_monDir + 1) + '/' + dirs.length;
+  document.getElementById('monIdx').textContent = _monIdx + 1;
+  document.getElementById('monCnt').textContent = d.n;
+}
+function monAdvance() {
+  var img = document.getElementById('monFrame');
+  var act = img.dataset.act;
+  var dirs = monDirs(act);
+  _monIdx = _monIdx + 1;
+  if (_monIdx >= dirs[_monDir].n) {
+    _monIdx = 0; _monDir = _monDir + 1;
+    if (_monDir >= dirs.length) {
+      if (act === 'die') { monStop(); return; }  // 死亡: 播完停尸体帧, 不循环
+      _monDir = 0;
+    }
+  }
+  monShow();
+}
+function monStart() {
+  var img = document.getElementById('monFrame');
+  var act = img.dataset.act;
+  var delay = ((act === 'standing' || act === 'die') ? 180 : 120) * _monSpeed;
+  clearInterval(_monTimer);
+  _monTimer = setInterval(monAdvance, delay);
+}
+function monPlay(btn, mid) {
+  monStop();
+  var img = document.getElementById('monFrame');
+  var act = btn.dataset.act;
+  img.dataset.act = act; img.dataset.mid = mid;
+  _monDir = 0; _monIdx = 0;
+  monShow();
+  document.getElementById('monActZh').textContent = MON_ACT_ZH[act] || act;
+  Array.prototype.forEach.call(document.querySelectorAll('.mon-act'), function (b) {
+    b.classList.remove('on');
+  });
+  btn.classList.add('on');
+  var pb = document.getElementById('monPlay');
+  pb.disabled = false; pb.dataset.on = '0'; pb.textContent = '▶ 播放';
+  // 点动作按钮即自动播放该动作
+  pb.click();
+}
+function monPlayBtn(btn) {
+  var img = document.getElementById('monFrame');
+  if (!img.dataset.mid || monDirs(img.dataset.act).length === 0) return;
+  if (btn.dataset.on === '1') { monStop(); return; }
+  btn.dataset.on = '1'; btn.textContent = '⏸ 暂停';
+  monStart();
+}
+// 速度分段按钮: 正常1x / 慢2x / 极慢4x, 播放中切换即时生效
+function monSpeed(btn) {
+  _monSpeed = parseInt(btn.dataset.s, 10) || 1;
+  Array.prototype.forEach.call(document.querySelectorAll('#monSpeedGrp .spd'), function (b) {
+    b.classList.remove('on');
+  });
+  btn.classList.add('on');
+  var pb = document.getElementById('monPlay');
+  if (pb && pb.dataset.on === '1') monStart();
+}
+// 页面加载后自动播放默认动作 (行走)
+window.addEventListener('load', function () {
+  var pb = document.getElementById('monPlay');
+  if (pb) { pb.disabled = false; pb.click(); }
+});
+</script>
+</head>
+<body>
+<header><nav>
+<a href="/index.html" >首页</a>
+<a href="/maps.html" >地图</a>
+<a href="/monsters.html" >怪物图鉴</a>
+<a href="/items.html" >装备</a>
+<a href="/skills.html" >技能</a>
+<a href="/npcs.html" >NPC</a>
+<a href="/quests.html" >任务</a>
+<a href="/companions.html" >宠物与坐骑</a>
+<a href="/stores.html" >商店</a>
+<a href="/classes.html" >职业</a>
+<a href="/sets.html" >套装</a>
+<a href="/moves.html" >传送</a>
+<a href="/library.html" >资源库</a>
+<a href="/diff.html" >差异裁剪</a>
+<a href="/terms.html" >术语</a>
+<a href="/stages.html" >阶段对照</a>
+</nav></header>
+<main>
+<h1>术语表 · 1701 词条</h1>
+<p class="lead">老版 DAT / 服务端字段英文术语 → 中文对照 · 共 1701 条</p>
+<form class="filters" method="get" action="/terms"><input type="text" name="q" value="" placeholder="输入英文或中文关键词…"><button type="submit">搜索</button></form>
+<table><tr><th>英文术语</th><th>中文释义</th></tr><tr><td class='mono'>!Balanced Bracelet (OLD)</td><td>平衡手镯（旧版）</td></tr><tr><td class='mono'>!Bat Fang (OLD)</td><td>蝙蝠獠牙（旧）</td></tr><tr><td class='mono'>!Cat's Claw</td><td>猫爪</td></tr><tr><td class='mono'>!Mana Pill (V)</td><td>特效魔法丸</td></tr><tr><td class='mono'>!Mana Potion (V)</td><td>特效魔法药</td></tr><tr><td class='mono'>!Rejuvenation Potion (III)</td><td>特效太阳水</td></tr><tr><td class='mono'>!Rejuvenation Potion (IV)</td><td>超级太阳水</td></tr><tr><td class='mono'>!Rejuvenation Potion (V)</td><td>终极太阳水</td></tr><tr><td class='mono'>!Shell Fragment</td><td>贝壳碎片</td></tr><tr><td class='mono'>!Trinket</td><td>小饰品</td></tr><tr><td class='mono'>!Tuft of Fur</td><td>毛簇</td></tr><tr><td class='mono'>!Worm Guts</td><td>虫内脏</td></tr><tr><td class='mono'>15</td><td>未命名(预留)</td></tr><tr><td class='mono'>15_001</td><td>未命名(预留)</td></tr><tr><td class='mono'>15_002</td><td>未命名(预留)</td></tr><tr><td class='mono'>15_003</td><td>未命名(预留)</td></tr><tr><td class='mono'>[Part]</td><td>部件</td></tr><tr><td class='mono'>_Blank_</td><td>（未使用）</td></tr><tr><td class='mono'>Abandoned Town</td><td>废弃小镇</td></tr><tr><td class='mono'>Abbott</td><td>阿博特</td></tr><tr><td class='mono'>Abyss</td><td>深渊</td></tr><tr><td class='mono'>Accessory Repair Oil</td><td>饰品修理油</td></tr><tr><td class='mono'>Adamantine Fire Ball</td><td>大火球</td></tr><tr><td class='mono'>Adamantoise</td><td>金刚龟</td></tr><tr><td class='mono'>Additional Vault</td><td>扩展仓库</td></tr><tr><td class='mono'>Administrator</td><td>管理员</td></tr><tr><td class='mono'>Advanced Bloody Flower</td><td>高级血花（技能书）</td></tr><tr><td class='mono'>Advanced Defiance</td><td>高级铁布衫</td></tr><tr><td class='mono'>Advanced Destructive Surge</td><td>高级破血狂杀</td></tr><tr><td class='mono'>Advanced Potion Mastery</td><td>高级药水精通</td></tr><tr><td class='mono'>Advanced Reflect Damage</td><td>高级移花接玉</td></tr><tr><td class='mono'>Advent Of Demon</td><td>恶魔降临</td></tr><tr><td class='mono'>Advent Of Devil</td><td>魔尊降临</td></tr><tr><td class='mono'>Aered</td><td>埃雷德</td></tr><tr><td class='mono'>Afterlife</td><td>来世</td></tr><tr><td class='mono'>Aged Gold Band Of Mystic</td><td>古旧神秘金环</td></tr><tr><td class='mono'>Alexandrite Bracelet</td><td>变石手镯</td></tr><tr><td class='mono'>Alexandrite Necklace</td><td>变石项链</td></tr><tr><td class='mono'>Alexandrite Ring</td><td>变石戒指</td></tr><tr><td class='mono'>Alpha, Hammer of Cruelty</td><td>阿尔法·残酷之锤</td></tr><tr><td class='mono'>Amber Necklace</td><td>琥珀项链</td></tr><tr><td class='mono'>Ambitious Glaive Of Doom</td><td>雄心毁灭之刃</td></tr><tr><td class='mono'>Ambitious Sword Of Abyss</td><td>雄心深渊之刃</td></tr><tr><td class='mono'>Ambitious Warden's Fan Of Obedience</td><td>雄心道士扇</td></tr><tr><td class='mono'>Amel</td><td>阿梅尔</td></tr><tr><td class='mono'>Amethyst</td><td>紫水晶</td></tr><tr><td class='mono'>Amulet Of Absorption</td><td>吸收护符</td></tr><tr><td class='mono'>Amulet Of Ancient Kingdom</td><td>古王国护符</td></tr><tr><td class='mono'>Amulet Of Chaos</td><td>混沌护符</td></tr><tr><td class='mono'>Amulet Of Dark Sorcery</td><td>黑暗巫术护符</td></tr><tr><td class='mono'>Amulet Of Empowerment</td><td>强化护符</td></tr><tr><td class='mono'>Amulet Of Five Elements</td><td>五行护符</td></tr><tr><td class='mono'>Amulet Of Redemption</td><td>救赎护符</td></tr><tr><td class='mono'>Amulet Of Sirius</td><td>天狼星护符</td></tr><tr><td class='mono'>Amulet Of Summoning</td><td>召唤护符</td></tr><tr><td class='mono'>Amulet Of The Cult Leader</td><td>邪教首领护符</td></tr><tr><td class='mono'>Amulet Of The Dragon Lord</td><td>龙帝护符</td></tr><tr><td class='mono'>Amulet Of The Enlightened</td><td>觉悟者护符</td></tr><tr><td class='mono'>Amulet Of Vanquishment</td><td>征服护符</td></tr><tr><td class='mono'>Amulet Of Wisdom</td><td>智慧护符</td></tr><tr><td class='mono'>Amy</td><td>艾米</td></tr><tr><td class='mono'>Ancestral Tablet Of Sama Mage</td><td>萨玛法师先祖牌位</td></tr><tr><td class='mono'>Ancient Myrmidon Band</td><td>远古密尔弥冬之环</td></tr><tr><td class='mono'>Angel Head Band</td><td>天使头带</td></tr><tr><td class='mono'>Angel Wings</td><td>天使之翼</td></tr><tr><td class='mono'>Ant Cave East</td><td>蚂蚁洞东</td></tr><tr><td class='mono'>Ant Cave North</td><td>蚂蚁洞北</td></tr><tr><td class='mono'>Ant Cave South</td><td>蚂蚁洞南</td></tr><tr><td class='mono'>Ant Cave West</td><td>蚂蚁洞西</td></tr><tr><td class='mono'>Ant Commander</td><td>蚁军统领</td></tr><tr><td class='mono'>Ant Egg</td><td>蚁卵</td></tr><tr><td class='mono'>Ant Healer</td><td>治疗蚁</td></tr><tr><td class='mono'>Ant Needler</td><td>针刺蚁</td></tr><tr><td class='mono'>Ant Soldier</td><td>兵蚁</td></tr><tr><td class='mono'>Anti Evil Necklace</td><td>辟邪项链</td></tr><tr><td class='mono'>Apocalypse</td><td>天启</td></tr><tr><td class='mono'>Apparition Archer</td><td>幻影弓手</td></tr><tr><td class='mono'>Apparition Bladesman</td><td>幻影刀客</td></tr><tr><td class='mono'>Apparition Soldier</td><td>幻影士兵</td></tr><tr><td class='mono'>Apprentice's Hand Blade</td><td>学徒手刃</td></tr><tr><td class='mono'>Apprentice's Mask</td><td>学徒面罩</td></tr><tr><td class='mono'>Aqua Lizard</td><td>水蜥蜴</td></tr><tr><td class='mono'>Arachnid Broodmother</td><td>蛛母</td></tr><tr><td class='mono'>Arachnid Gazer</td><td>蛛眼凝视者</td></tr><tr><td class='mono'>Arachnid Teeth</td><td>蛛类牙齿</td></tr><tr><td class='mono'>Arcanist's Amulet Of Dignity</td><td>秘法师的尊严护符</td></tr><tr><td class='mono'>Arcanist's Band Of Dignity</td><td>秘法师的尊严之环</td></tr><tr><td class='mono'>Arcanist's Bracelet Of Dignity</td><td>秘法师的尊严手镯</td></tr><tr><td class='mono'>Arch Lich Taedu</td><td>大巫妖·泰杜</td></tr><tr><td class='mono'>Archon's Battleplate (F)</td><td>执政官战甲（女）</td></tr><tr><td class='mono'>Archon's Battleplate (M)</td><td>执政官战甲（男）</td></tr><tr><td class='mono'>Argent Battleplate Of Might (F)</td><td>威能白银战甲（女）</td></tr><tr><td class='mono'>Argent Battleplate Of Might (M)</td><td>威能白银战甲（男）</td></tr><tr><td class='mono'>Argent Sabatons Of Comet</td><td>彗星白银足甲</td></tr><tr><td class='mono'>Arid Flats</td><td>干涸平原</td></tr><tr><td class='mono'>Arisu Bracelet</td><td>爱丽丝手镯</td></tr><tr><td class='mono'>Arisu Necklace</td><td>爱丽丝项链</td></tr><tr><td class='mono'>Arisu Wood Sword</td><td>阿里斯木剑</td></tr><tr><td class='mono'>Arlie</td><td>阿利</td></tr><tr><td class='mono'>Arm Wrap Of Vigor</td><td>活力臂带</td></tr><tr><td class='mono'>Armband Of The Dragon Lord</td><td>龙帝护腕</td></tr><tr><td class='mono'>Armguard Of Dragon Abyss</td><td>龙渊护腕</td></tr><tr><td class='mono'>Armor Shop</td><td>铠甲店</td></tr><tr><td class='mono'>Armour Dye</td><td>护甲染色</td></tr><tr><td class='mono'>Armour Of Abyss (F)</td><td>深渊铠甲（女）</td></tr><tr><td class='mono'>Armour Of Abyss (M)</td><td>深渊铠甲（男）</td></tr><tr><td class='mono'>Armour of Arcane Fury (F)</td><td>秘法之怒铠甲（女）</td></tr><tr><td class='mono'>Armour of Arcane Fury (M)</td><td>秘法之怒铠甲（男）</td></tr><tr><td class='mono'>Armour Of Condemned (F)</td><td>罪罚者铠甲（女）</td></tr><tr><td class='mono'>Armour Of Condemned (M)</td><td>罪罚者铠甲（男）</td></tr><tr><td class='mono'>Armour Of Demonic Wrath (F)</td><td>恶魔之怒铠甲（女）</td></tr><tr><td class='mono'>Armour Of Demonic Wrath (M)</td><td>恶魔之怒铠甲（男）</td></tr><tr><td class='mono'>Armour of Eternal Rest (F)</td><td>永恒安息铠甲（女）</td></tr><tr><td class='mono'>Armour of Eternal Rest (M)</td><td>永恒安息铠甲（男）</td></tr><tr><td class='mono'>Armour of the Blessed King</td><td>祝福王铠甲</td></tr><tr><td class='mono'>Armour of the Blessed Queen</td><td>祝福后铠甲</td></tr><tr><td class='mono'>Armour of the Sun Keeper (F)</td><td>太阳守护者铠甲（女）</td></tr><tr><td class='mono'>Armour of the Sun Keeper (M)</td><td>太阳守护者铠甲（男）</td></tr><tr><td class='mono'>Armour of the Titan Slayer (F)</td><td>泰坦屠戮者铠甲（女）</td></tr><tr><td class='mono'>Armour of the Titan Slayer (M)</td><td>泰坦屠戮者铠甲（男）</td></tr><tr><td class='mono'>Armour Polisher</td><td>护甲打磨石</td></tr><tr><td class='mono'>Armour Repair Oil</td><td>防具修理油</td></tr><tr><td class='mono'>Armoured Ant</td><td>重甲蚁</td></tr><tr><td class='mono'>Armoured Bracer Of Ancient Kingdom</td><td>古王国装甲护腕</td></tr><tr><td class='mono'>Art of Shadows</td><td>暗影术</td></tr><tr><td class='mono'>Ascension Bracelet</td><td>飞升手镯</td></tr><tr><td class='mono'>Assassin's Edge</td><td>刺客之刃</td></tr><tr><td class='mono'>Assassin's Hideout</td><td>刺客藏身处</td></tr><tr><td class='mono'>Assassin's Ripper</td><td>刺客撕裂者</td></tr><tr><td class='mono'>Assassination Mask</td><td>暗杀面罩</td></tr><tr><td class='mono'>Assault</td><td>突袭</td></tr><tr><td class='mono'>Asteroid</td><td>陨石术</td></tr><tr><td class='mono'>Augmented Bronze Gauntlet</td><td>强化青铜护手</td></tr><tr><td class='mono'>Azog</td><td>阿佐格</td></tr><tr><td class='mono'>Azure Armguard Of Purity</td><td>纯净天青护腕</td></tr><tr><td class='mono'>Azure Raiment Of Illusion (F)</td><td>蔚蓝幻象法衣（女）</td></tr><tr><td class='mono'>Azure Raiment Of Illusion (M)</td><td>蔚蓝幻象法衣（男）</td></tr><tr><td class='mono'>Baldwy</td><td>鲍德维</td></tr><tr><td class='mono'>Bamboo Hat</td><td>竹笠</td></tr><tr><td class='mono'>Bamboo Necklace</td><td>竹项链</td></tr><tr><td class='mono'>Band Of Azure Sky</td><td>蔚蓝天空之环</td></tr><tr><td class='mono'>Band Of Dragon Abyss</td><td>龙渊之环</td></tr><tr><td class='mono'>Band Of Magic</td><td>魔法之环</td></tr><tr><td class='mono'>Band Of Netherworld</td><td>冥界之环</td></tr><tr><td class='mono'>Band Of Sorcery</td><td>巫术之环</td></tr><tr><td class='mono'>Band Of Unstable Energy</td><td>不稳定能量之环</td></tr><tr><td class='mono'>Banya Cave Lv 1</td><td>潘夜洞 1 层</td></tr><tr><td class='mono'>Banya Cave Lv 2</td><td>潘夜洞 2 层</td></tr><tr><td class='mono'>Banya Cave Lv 3</td><td>潘夜洞 3 层</td></tr><tr><td class='mono'>Banya Gem Stone</td><td>潘夜宝石</td></tr><tr><td class='mono'>Banya Guardian</td><td>潘夜守护者</td></tr><tr><td class='mono'>Banya Island</td><td>潘夜岛</td></tr><tr><td class='mono'>Banya Left Guard</td><td>潘夜左卫</td></tr><tr><td class='mono'>Banya Mage Staff</td><td>潘夜法师法杖</td></tr><tr><td class='mono'>Banya Right Guard</td><td>潘夜右卫</td></tr><tr><td class='mono'>Banya Stone Cave Lv 1</td><td>潘夜石窟 1 层</td></tr><tr><td class='mono'>Banya Stone Cave Lv 2</td><td>潘夜石窟 2 层</td></tr><tr><td class='mono'>Banya Stone Cave Lv 3</td><td>潘夜石窟 3 层</td></tr><tr><td class='mono'>Banya Stone Cave Lv 4</td><td>潘夜石窟 4 层</td></tr><tr><td class='mono'>Banya Stone Cave Lv 5</td><td>潘夜石窟 5 层</td></tr><tr><td class='mono'>Banya Temple</td><td>潘夜神殿(最深层)</td></tr><tr><td class='mono'>Banya Temple Hall</td><td>潘夜神殿大殿</td></tr><tr><td class='mono'>Banya Temple Lv 1</td><td>潘夜神殿 1 层</td></tr><tr><td class='mono'>Banya Temple Lv 10</td><td>潘夜神殿 10 层</td></tr><tr><td class='mono'>Banya Temple Lv 2</td><td>潘夜神殿 2 层</td></tr><tr><td class='mono'>Banya Temple Lv 3-E</td><td>潘夜神殿 3 层东</td></tr><tr><td class='mono'>Banya Temple Lv 3-W</td><td>潘夜神殿 3 层西</td></tr><tr><td class='mono'>Banya Temple Lv 4</td><td>潘夜神殿 4 层</td></tr><tr><td class='mono'>Banya Temple Lv 5</td><td>潘夜神殿 5 层</td></tr><tr><td class='mono'>Banya Temple Lv 6</td><td>潘夜神殿 6 层</td></tr><tr><td class='mono'>Banya Temple Lv 7</td><td>潘夜神殿 7 层</td></tr><tr><td class='mono'>Banya Temple Lv 8</td><td>潘夜神殿 8 层</td></tr><tr><td class='mono'>Banya Temple Lv 9 East</td><td>潘夜神殿 9 层东</td></tr><tr><td class='mono'>Banya Temple Lv 9 West</td><td>潘夜神殿 9 层西</td></tr><tr><td class='mono'>Banya Valley South</td><td>潘夜谷南</td></tr><tr><td class='mono'>Banya Village</td><td>潘夜村</td></tr><tr><td class='mono'>Banyo Captain</td><td>潘约队长</td></tr><tr><td class='mono'>Banyo Cave</td><td>潘约洞</td></tr><tr><td class='mono'>Banyo Island</td><td>潘约岛</td></tr><tr><td class='mono'>Banyo Lord Guzak</td><td>潘约领主·古扎克</td></tr><tr><td class='mono'>Banyo Soldier</td><td>潘约士兵</td></tr><tr><td class='mono'>Banyo Warrior</td><td>潘约战士</td></tr><tr><td class='mono'>Barrage breaker Phoenix Shield</td><td>破弹幕凤凰盾</td></tr><tr><td class='mono'>Basic Worn Bag</td><td>破旧背包</td></tr><tr><td class='mono'>Battle Necklace</td><td>战斗项链</td></tr><tr><td class='mono'>Beckon</td><td>召唤</td></tr><tr><td class='mono'>Beef</td><td>牛肉</td></tr><tr><td class='mono'>Beetle</td><td>甲虫</td></tr><tr><td class='mono'>Beyond Shore</td><td>彼岸</td></tr><tr><td class='mono'>Bichon Castle</td><td>比奇城堡</td></tr><tr><td class='mono'>Bichon Cave Lv 1</td><td>比奇矿 1 层</td></tr><tr><td class='mono'>Bichon Cave Lv 2</td><td>比奇矿 2 层</td></tr><tr><td class='mono'>Bichon Cave Lv 3</td><td>比奇矿 3 层</td></tr><tr><td class='mono'>Bichon Town</td><td>比奇城</td></tr><tr><td class='mono'>Big Skeleton Bone</td><td>巨型骷髅骨</td></tr><tr><td class='mono'>Black Boar</td><td>黑野猪</td></tr><tr><td class='mono'>Black Crystal Necklace</td><td>黑水晶项链</td></tr><tr><td class='mono'>Black Crystal Ring</td><td>黑水晶戒指</td></tr><tr><td class='mono'>Black Iron Ore</td><td>黑铁矿石</td></tr><tr><td class='mono'>Black Palace</td><td>黑宫大殿</td></tr><tr><td class='mono'>Black Palace Demon</td><td>黑宫恶魔</td></tr><tr><td class='mono'>Black Palace Lv 1</td><td>黑宫 1 层</td></tr><tr><td class='mono'>Black Palace Lv 2-E</td><td>黑宫 2 层东</td></tr><tr><td class='mono'>Black Palace Lv 2-W</td><td>黑宫 2 层西</td></tr><tr><td class='mono'>Black Palace Lv 3</td><td>黑宫 3 层</td></tr><tr><td class='mono'>Black Palace Lv 4</td><td>黑宫 4 层</td></tr><tr><td class='mono'>Black Palace Warlord</td><td>黑宫战将</td></tr><tr><td class='mono'>Black Sama</td><td>黑萨玛</td></tr><tr><td class='mono'>Blade Of Spirit Caller</td><td>唤灵之刃</td></tr><tr><td class='mono'>Blade Of The Dragon Lord</td><td>龙帝之刃</td></tr><tr><td class='mono'>Blade Storm</td><td>莲月剑法</td></tr><tr><td class='mono'>Blades Of Sama</td><td>萨玛双刃</td></tr><tr><td class='mono'>Blaster Mutant Flea</td><td>爆弹变异跳蚤</td></tr><tr><td class='mono'>Blazing Armguard Of Crescent</td><td>新月炽焰护腕</td></tr><tr><td class='mono'>Blazing Raiment Of Embers (F)</td><td>余烬炽焰法衣（女）</td></tr><tr><td class='mono'>Blazing Raiment Of Embers (M)</td><td>余烬炽焰法衣（男）</td></tr><tr><td class='mono'>Blazing Raiment Of Phoenix (F)</td><td>凤凰炽焰法衣（女）</td></tr><tr><td class='mono'>Blazing Raiment Of Phoenix (M)</td><td>凤凰炽焰法衣（男）</td></tr><tr><td class='mono'>Blessed Ring Of Exorcism</td><td>祝福驱魔戒指</td></tr><tr><td class='mono'>Blizzard Tiger</td><td>暴雪虎</td></tr><tr><td class='mono'>Blood Lust</td><td>嗜血术</td></tr><tr><td class='mono'>Blood Prophet's Cowl</td><td>血先知头巾帽</td></tr><tr><td class='mono'>Blood Stone</td><td>血石</td></tr><tr><td class='mono'>Blood Thristy Ghoul</td><td>嗜血食尸鬼</td></tr><tr><td class='mono'>Blood Thristy Zombie</td><td>嗜血僵尸</td></tr><tr><td class='mono'>Blood Tiger</td><td>血虎</td></tr><tr><td class='mono'>Bloodthirsty Bracelet Of Carnage</td><td>屠戮嗜血手镯</td></tr><tr><td class='mono'>Bloodthirsty Pendant Of Carnage</td><td>屠戮嗜血吊坠</td></tr><tr><td class='mono'>Bloodthirsty Signet Of Carnage</td><td>屠戮嗜血印章戒</td></tr><tr><td class='mono'>Bloody Armed Beetle</td><td>血武装甲虫</td></tr><tr><td class='mono'>Bloody Flower</td><td>血花</td></tr><tr><td class='mono'>Bloody Mole</td><td>血鼹鼠</td></tr><tr><td class='mono'>Blow Earth</td><td>狂风术</td></tr><tr><td class='mono'>Blue Crystal Ring</td><td>蓝水晶戒指</td></tr><tr><td class='mono'>Blue Cube</td><td>蓝色立方体</td></tr><tr><td class='mono'>Blue Dragon Armour</td><td>蓝龙马甲</td></tr><tr><td class='mono'>Blue Horse Armour</td><td>蓝马甲</td></tr><tr><td class='mono'>Blue Jade Necklace</td><td>蓝玉项链</td></tr><tr><td class='mono'>Blue Jade Signet</td><td>蓝玉印章戒</td></tr><tr><td class='mono'>Blue Orb</td><td>蓝色宝珠</td></tr><tr><td class='mono'>Blue Sama</td><td>蓝萨玛</td></tr><tr><td class='mono'>Blue Sword Of Purification</td><td>蓝色净化之剑</td></tr><tr><td class='mono'>Blue Trinket</td><td>蓝色小饰品</td></tr><tr><td class='mono'>Bobbit Bobbit</td><td>博比特·博比特</td></tr><tr><td class='mono'>Bobbit Worm</td><td>博比特虫</td></tr><tr><td class='mono'>Bone Archer</td><td>骨弓手</td></tr><tr><td class='mono'>Bone Bladesman</td><td>骨刀客</td></tr><tr><td class='mono'>Bone Captain</td><td>骨队长</td></tr><tr><td class='mono'>Bone Claymore</td><td>骨制大剑</td></tr><tr><td class='mono'>Bone Soldier</td><td>骨兵</td></tr><tr><td class='mono'>Boots Of Black Tortoise</td><td>玄武之靴</td></tr><tr><td class='mono'>Boots Of Crimson Steed</td><td>绯红骏马之靴</td></tr><tr><td class='mono'>Boots Of Despair</td><td>绝望之靴</td></tr><tr><td class='mono'>Boots Of Levitation</td><td>漂浮之靴</td></tr><tr><td class='mono'>Boots Of Swiftness</td><td>迅捷之靴</td></tr><tr><td class='mono'>Bracelet Of Ascension</td><td>飞升手镯</td></tr><tr><td class='mono'>Bracelet Of Canopus</td><td>老人星手镯</td></tr><tr><td class='mono'>Bracelet Of Evasion</td><td>闪避手镯</td></tr><tr><td class='mono'>Bracelet Of Exertion</td><td>蛮力手镯</td></tr><tr><td class='mono'>Bracelet Of Overlord</td><td>霸主手镯</td></tr><tr><td class='mono'>Bracelet Of Redemption</td><td>救赎手镯</td></tr><tr><td class='mono'>Bracelet Of Sorcery</td><td>巫术手镯</td></tr><tr><td class='mono'>Bracelet Of Spirit Caller</td><td>通灵者手镯</td></tr><tr><td class='mono'>Bracelet Of Summoning</td><td>召唤手镯</td></tr><tr><td class='mono'>Bracelet Of Three Eyes</td><td>三眼手镯</td></tr><tr><td class='mono'>Bracer Of Artisan</td><td>工匠护腕</td></tr><tr><td class='mono'>Bracer Of Magic</td><td>魔法护腕</td></tr><tr><td class='mono'>Bracer Of Revelation</td><td>启示护腕</td></tr><tr><td class='mono'>Brass Feral Warrior</td><td>黄铜野性战士</td></tr><tr><td class='mono'>Bright Candle</td><td>明亮蜡烛</td></tr><tr><td class='mono'>Bright Torch</td><td>明亮火把</td></tr><tr><td class='mono'>Brightly Coloured Shoes</td><td>鲜艳彩鞋</td></tr><tr><td class='mono'>Brilliant Band Of Harmony</td><td>和谐璀璨之环</td></tr><tr><td class='mono'>Bronze Axe</td><td>青铜斧</td></tr><tr><td class='mono'>Bronze Chestnut</td><td>青铜栗子</td></tr><tr><td class='mono'>Bronze Gauntlet</td><td>青铜护手</td></tr><tr><td class='mono'>Bronze Helmet</td><td>青铜头盔</td></tr><tr><td class='mono'>Bronze Shield</td><td>青铜盾</td></tr><tr><td class='mono'>Bronze Sword</td><td>青铜剑</td></tr><tr><td class='mono'>Brown Chestnut</td><td>棕栗子</td></tr><tr><td class='mono'>Burga</td><td>布尔加</td></tr><tr><td class='mono'>Burning</td><td>灼烧</td></tr><tr><td class='mono'>Burning Blade Of Sama</td><td>萨玛烈焰之刃</td></tr><tr><td class='mono'>Burning Dark Stone</td><td>燃烧黑铁石</td></tr><tr><td class='mono'>Burning Dark Stone (II)</td><td>燃烧黑铁石（二）</td></tr><tr><td class='mono'>Burning Dark Stone (III)</td><td>燃烧黑铁石（三）</td></tr><tr><td class='mono'>Burning Dark Stone (IV)</td><td>燃烧黑铁石（四）</td></tr><tr><td class='mono'>Burning Dark Stone (V)</td><td>燃烧黑铁石（五）</td></tr><tr><td class='mono'>Burning Fire</td><td>烈焰陷阱</td></tr><tr><td class='mono'>Butcher's Necklace</td><td>屠夫项链</td></tr><tr><td class='mono'>Butterfly Worm</td><td>蝶形虫</td></tr><tr><td class='mono'>Calamity</td><td>灾厄</td></tr><tr><td class='mono'>Calamity Of Full Moon</td><td>月华</td></tr><tr><td class='mono'>Calla</td><td>卡拉</td></tr><tr><td class='mono'>Candle</td><td>蜡烛</td></tr><tr><td class='mono'>Cannibal Fanatic</td><td>食人狂信徒</td></tr><tr><td class='mono'>Carmine Claw Determination</td><td>深红之爪·决心</td></tr><tr><td class='mono'>Carnivorous Plant</td><td>食人花</td></tr><tr><td class='mono'>Carnivorous Plant Fruit</td><td>食人花果</td></tr><tr><td class='mono'>Carnivorous Plant Leaf</td><td>食人花叶</td></tr></table>
+<div class="pager"><a class="pg on" href="/terms?p=1.html">1</a><a class="pg" href="/terms?p=2.html">2</a><a class="pg" href="/terms?p=3.html">3</a><span class="pg dots">…</span><a class="pg" href="/terms?p=6.html">6</a><a class="pg" href="/terms?p=2.html" title="下一页">›</a><a class="pg" href="/terms?p=6.html" title="最后一页">»</a> <span class="pager-info">第 <b>1</b> / 6 页</span><span class="pg-jump" id="pgJump"><button type="button" onclick="pgJumpToggle(event)" aria-haspopup="listbox" aria-expanded="false">跳转到… <span class="arrow">▾</span></button><span class="menu" role="listbox"><a href="/terms?p=1.html" role="option" aria-current="page" class="cur">1</a><a href="/terms?p=2.html" role="option">2</a><a href="/terms?p=3.html" role="option">3</a><a href="/terms?p=4.html" role="option">4</a><a href="/terms?p=5.html" role="option">5</a><a href="/terms?p=6.html" role="option">6</a></span></span></div>
+</main>
+<footer>EI 传奇3.0 客户端百科 · 数据源: Mud3 服务端 Envir / Zircon System.db / EI 客户端资源 · 本地服务 · 构建 2026-08-11T09:04:42+00:00</footer>
+</body></html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶段对照 · EI 传奇3.0 百科</title>
+<style>
+:root {
+  --bg:#0d1117; --panel:#151e28; --line:#2a3a49; --fg:#e7eef5;
+  --dim:#9eafbf; --acc:#e7b76c; --ac2:#78d5cc; --good:#8bd3a6; --bad:#f18b82;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--fg); font:15px/1.6 "PingFang SC","Microsoft YaHei",system-ui,sans-serif; }
+a { color:var(--ac2); text-decoration:none; } a:hover { text-decoration:underline; }
+header { position:sticky; top:0; z-index:50; background:rgba(18,20,23,.97); border-bottom:1px solid var(--line); }
+nav { display:flex; flex-wrap:wrap; gap:2px 14px; padding:10px 18px; max-width:1280px; margin:0 auto; }
+nav a { padding:4px 8px; border-radius:6px; color:var(--fg); font-size:14px; }
+nav a:hover { background:var(--panel); text-decoration:none; }
+nav a.active { color:var(--acc); font-weight:700; }
+main { max-width:1280px; margin:0 auto; padding:20px 18px 80px; }
+h1 { font-size:24px; margin:6px 0 16px; }
+h2 { font-size:19px; margin:24px 0 10px; border-bottom:1px solid var(--line); padding-bottom:6px; }
+.lead { color:var(--dim); margin-bottom:18px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:14px; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+.card a { color:var(--fg); display:block; padding:10px 12px; }
+.card a:hover { background:rgba(255,255,255,.03); text-decoration:none; }
+.card .thumb { width:100%; aspect-ratio:16/10; object-fit:cover; background:#0d0f12; display:block; }
+.card .name { font-weight:600; }
+.card .sub { color:var(--dim); font-size:12.5px; margin-top:2px; }
+.card .sub .avatar { width:34px; height:34px; object-fit:contain; vertical-align:-10px; margin-right:8px; background:#0d0f12; border-radius:6px; }
+.card .sub .avatar.noimg { width:34px; height:34px; display:inline-block; vertical-align:-10px; margin-right:8px; }
+.tag { display:inline-block; font-size:11px; padding:1px 7px; border-radius:9px; margin-left:6px; vertical-align:1px; }
+.tag-ei { background:#5a2d2d; color:#ff9d9d; }
+.tag-mei { background:#2d3a5a; color:#9db8ff; }
+.tag-zir { background:#3a2d5a; color:#d0b3ff; }
+.tag-mud3 { background:#2d5a3a; color:#a8f0c0; }
+.tag-legacy { background:#5a4a2d; color:#ffd98d; }
+.icon { width:64px; height:64px; object-fit:contain; background:#0d0f12; border-radius:8px; }
+.noimg { background:#0d0f12; border-radius:8px; }
+.card .pic { width:100%; height:118px; object-fit:contain; background:#0d0f12; padding:8px; display:block; }
+.card .noimg.pic { height:118px; }
+.detail .bigpic { width:150px; height:150px; object-fit:contain; background:#0d0f12; border-radius:10px; }
+.detail .noimg.bigpic { width:150px; height:150px; }
+table img.icon { width:44px; height:44px; }
+.none { color:var(--dim); font-style:italic; }
+.badge { display:inline-block; font-size:11px; padding:1px 8px; border-radius:9px; margin:2px 4px 2px 0; background:#263040; color:#c9d6ea; }
+table { border-collapse:collapse; width:100%; margin:8px 0; }
+th,td { border:1px solid var(--line); padding:6px 10px; text-align:left; font-size:14px; }
+th { background:#20242c; color:var(--dim); font-weight:600; }
+tr:nth-child(even) td { background:rgba(255,255,255,.015); }
+.filters { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 16px; }
+.filters input,.filters select { background:var(--panel); border:1px solid var(--line); color:var(--fg);
+  border-radius:8px; padding:6px 10px; font-size:14px; }
+.filters button { background:#2b3547; color:var(--fg); border:none; border-radius:8px; padding:6px 14px;
+  cursor:pointer; font-size:14px; } .filters button:hover { background:#35435c; }
+.csel { position:relative; display:inline-block; }
+.csel-btn { background:var(--panel); border:1px solid var(--line); color:var(--fg); padding:6px 12px;
+  border-radius:8px; font-size:14px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; min-width:108px; }
+.csel-btn:hover { border-color:var(--acc); }
+.csel-btn .arrow { color:var(--dim); font-size:10px; }
+.csel-menu { display:none; position:absolute; z-index:60; top:calc(100% + 4px); left:0; min-width:150px;
+  max-height:280px; overflow-y:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  box-shadow:0 10px 28px rgba(0,0,0,.5); list-style:none; margin:0; padding:4px 0; }
+.csel.open .csel-menu { display:block; }
+.csel.open .csel-btn { border-color:var(--acc); }
+.csel-menu li a { display:block; padding:6px 12px; color:var(--fg); font-size:13.5px; text-decoration:none;
+  white-space:nowrap; }
+.csel-menu li a:hover { background:#1b2631; }
+.csel-menu li[aria-current="true"] a { color:var(--acc); font-weight:700; background:#16202a; }
+.chip { display:inline-flex; align-items:center; gap:5px; background:var(--panel); border:1px solid var(--line);
+  border-radius:16px; padding:3px 11px 3px 8px; cursor:pointer; font-size:13.5px; user-select:none; }
+.chip input { accent-color:var(--acc); cursor:pointer; }
+.chip:has(input:checked) { border-color:var(--acc); background:#2b2a1f; color:var(--acc); }
+.chip a { color:var(--fg); text-decoration:none; }
+.chip a:hover { color:var(--acc); }
+.chip.on { border-color:var(--acc); background:#2b2a1f; color:var(--acc); }
+.chips { margin:10px 0 18px; display:flex; flex-wrap:wrap; gap:7px; }
+.store-sec { margin:22px 0; padding:14px 16px; background:var(--panel); border:1px solid var(--line); border-radius:12px; }
+.store-sec h2 { margin:0 0 6px; font-size:17px; }
+.store-sec .sub { color:var(--dim); font-size:13px; margin-bottom:10px; }
+.store-goods { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; align-items:center; }
+.sgood { display:flex; flex-direction:column; align-items:center; gap:2px; text-decoration:none; }
+.sgood .thumb { width:52px; height:52px; object-fit:contain; background:#0d0f12; border:1px solid var(--line); border-radius:6px; padding:2px; }
+.sgood:hover .thumb { border-color:var(--acc); }
+.sgood .sprice { color:var(--dim); font-size:11px; }
+.more { color:var(--dim); font-size:12.5px; padding-left:4px; }
+.store-head { display:flex; align-items:baseline; gap:8px; }
+.store-npc { display:flex; gap:12px; align-items:center; margin-top:10px; padding:10px 12px; background:#0d0f12; border:1px solid var(--line); border-radius:10px; }
+.store-npc .npc-avatar { flex:0 0 auto; }
+.store-npc .npc-avatar .avatar { width:56px; height:56px; object-fit:contain; background:#0d0f12; border-radius:8px; border:1px solid var(--line); }
+.store-npc .npc-avatar .avatar.noimg { width:56px; height:56px; display:block; }
+.store-npc .npc-avatar:hover .avatar { border-color:var(--acc); }
+.store-npc .npc-info { min-width:0; }
+.store-npc .npc-name { font-weight:600; color:var(--fg); text-decoration:none; }
+.store-npc .npc-name:hover { color:var(--acc); text-decoration:underline; }
+.store-npc .npc-pos { color:var(--dim); font-size:12px; margin:2px 0 6px; }
+.store-npc .npc-btns { display:flex; gap:6px; }
+.store-npc .btn { display:inline-block; font-size:12px; padding:2px 10px; border:1px solid var(--line); border-radius:6px; color:var(--ac2); text-decoration:none; background:var(--panel); }
+.store-npc .btn:hover { border-color:var(--acc); color:var(--acc); }
+.crumbs { color:var(--dim); font-size:13px; margin-bottom:6px; }
+.crumbs a { color:var(--ac2); }
+.panel-npc { display:flex; gap:14px; align-items:center; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:12px 0 20px; }
+.panel-npc .pic { width:64px; height:64px; object-fit:contain; background:#0d0f12; border-radius:8px; }
+.panel-npc .noimg.pic { width:64px; height:64px; }
+.npc-dlg { border-left:3px solid var(--ac2); padding:6px 0 6px 14px; margin:10px 0; }
+.npc-dlg-head { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:4px; }
+.npc-say { white-space:pre-wrap; background:#0d0f12; border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin:4px 0; color:var(--fg); font-size:13px; }
+.npc-btn { color:var(--ac2); font-size:12.5px; margin:2px 0; }
+.chip-dim { color:var(--dim); border-color:var(--line); }
+.chip-act { color:#c9a227; border-color:#c9a22766; }
+.chip-type { color:#7bb26a; border-color:#7bb26a66; }
+.pager { display:flex; align-items:center; justify-content:center; gap:8px; margin:34px 0; flex-wrap:wrap; }
+.pager .pg { display:inline-block; min-width:32px; text-align:center; padding:5px 9px; border:1px solid var(--line);
+  border-radius:7px; background:var(--panel); color:var(--fg); font-size:13.5px; transition:border-color .15s, background .15s; }
+.pager .pg:hover { border-color:var(--acc); background:#1b2631; text-decoration:none; }
+.pager .pg.on { background:var(--acc); color:#1a1408; border-color:var(--acc); font-weight:700; }
+.pager .pg.dots { border:none; background:none; min-width:auto; color:var(--dim); }
+.pager-info { font-size:13.5px; color:var(--dim); margin:0 4px; }
+.pager-info b { color:var(--acc); font-size:14.5px; }
+.pager .pg-go { padding:5px 10px; border:1px solid var(--line); border-radius:7px; background:var(--panel);
+  color:var(--fg); font-size:13.5px; cursor:pointer; max-width:120px; }
+.pager .pg-go:hover { border-color:var(--acc); }
+.anim { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px; }
+.anim-stage { display:flex; align-items:center; justify-content:center; min-height:150px; background:#0d0f12;
+  border:1px solid var(--line); border-radius:8px; margin-bottom:8px; overflow:hidden; }
+.anim-stage img { display:block; max-width:100%; height:auto; image-rendering:pixelated; }
+.anim-ctrl { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.anim-ctrl button { padding:5px 16px; border:1px solid var(--acc); background:var(--acc); color:#1a1408;
+  border-radius:7px; font-size:14px; font-weight:700; cursor:pointer; }
+.anim-ctrl button:hover { filter:brightness(1.1); }
+.anim-ctrl button:disabled { opacity:.5; cursor:default; }
+.mon-anim { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px; margin:14px 0; }
+.mon-anim .anim-stage { min-height:180px; }
+.mon-btns { display:flex; gap:6px; flex-wrap:wrap; }
+.mon-btns button { padding:5px 14px; border:1px solid var(--line); background:transparent; color:var(--fg);
+  border-radius:7px; cursor:pointer; font-size:13.5px; }
+.mon-btns button:hover { border-color:var(--acc); }
+.mon-btns button.on { background:var(--acc); color:#1a1408; border-color:var(--acc); font-weight:700; }
+.mon-speed { display:inline-flex; gap:2px; border:1px solid var(--line); border-radius:7px; overflow:hidden; }
+.mon-speed .spd { padding:4px 12px; border:none; background:transparent; color:var(--dim); font-size:12.5px;
+  cursor:pointer; border-radius:0; }
+.mon-speed .spd:hover { color:var(--fg); background:#1b2631; }
+.mon-speed .spd.on { background:var(--acc); color:#1a1408; font-weight:700; }
+#monPlay { padding:5px 16px; border:1px solid var(--acc); background:var(--acc); color:#1a1408;
+  border-radius:7px; font-size:14px; font-weight:700; cursor:pointer; }
+#monPlay:hover { filter:brightness(1.1); }
+#monPlay:disabled { opacity:.45; cursor:not-allowed; }
+.pager .pg-jump { position:relative; display:inline-block; }
+.pager .pg-jump button { padding:5px 12px; border:1px solid var(--line); border-radius:7px; background:var(--panel);
+  color:var(--fg); font-size:13.5px; cursor:pointer; min-width:96px; text-align:left; }
+.pager .pg-jump button:hover { border-color:var(--acc); }
+.pager .pg-jump .arrow { float:right; color:var(--dim); }
+.pager .pg-jump .menu { display:none; position:absolute; z-index:50; bottom:calc(100% + 6px); left:0;
+  max-height:240px; overflow-y:auto; background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  box-shadow:0 8px 24px rgba(0,0,0,.45); min-width:140px; }
+.pager .pg-jump.open .menu { display:block; }
+.pager .pg-jump .menu a { display:block; padding:5px 12px; color:var(--fg); font-size:13.5px; text-decoration:none; }
+.pager .pg-jump .menu a:hover { background:#1b2631; }
+.pager .pg-jump .menu a.on { background:var(--acc); color:#1a1408; font-weight:700; }
+.pager .pg-jump .menu a.cur { color:var(--acc); font-weight:700; background:#16202a; }
+.mapnet { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+.mapnet a { background:var(--panel); border:1px solid var(--line); border-radius:9px; padding:7px 12px;
+  font-size:13.5px; color:var(--fg); }
+.mapnet a:hover { border-color:var(--acc); text-decoration:none; }
+.mapnet a .dim { display:block; font-size:11.5px; }
+.stat { display:inline-block; background:var(--panel); border:1px solid var(--line); border-radius:10px;
+  padding:10px 16px; margin:0 10px 10px 0; text-align:center; min-width:110px; }
+.stat b { display:block; font-size:22px; color:var(--acc); }
+.stat span { font-size:12px; color:var(--dim); }
+.detail { display:flex; gap:24px; flex-wrap:wrap; margin:14px 0 26px; }
+.detail img { border:1px solid var(--line); border-radius:10px; max-width:480px; background:#0d0f12; }
+.meta { flex:1; min-width:280px; }
+.kv { display:grid; grid-template-columns:110px 1fr; gap:4px 12px; font-size:14px; }
+.kv dt { color:var(--dim); }
+.grid3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; }
+.grid4 { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+.dim { color:var(--dim); }
+.panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+.panel h3 { font-size:15px; margin-bottom:6px; }
+.mono { font-family:ui-monospace,Consolas,monospace; font-size:13px; color:var(--dim); }
+.good { color:var(--good); } .bad { color:var(--bad); }
+.bad-undead { display:inline-block; font-size:11px; padding:1px 7px; border-radius:9px; margin-left:4px; background:#3d2f2f; color:#ffb0b0; }
+.bad-tame { display:inline-block; font-size:11px; padding:1px 7px; border-radius:9px; margin-left:4px; background:#2f3d30; color:#b0ffb0; }
+footer { max-width:1280px; margin:0 auto; padding:8px 18px 30px; color:var(--dim); font-size:12.5px; }
+</style>
+<script>
+// 自定义分页跳页: 点按钮弹页码菜单, 点外部关闭
+function pgJumpToggle(e) {
+  var w = document.getElementById('pgJump');
+  if (!w) return;
+  var open = w.classList.toggle('open');
+  w.querySelector('button').setAttribute('aria-expanded', open ? 'true' : 'false');
+  e.stopPropagation();
+}
+document.addEventListener('click', function (e) {
+  var w = document.getElementById('pgJump');
+  if (w && !w.contains(e.target)) w.classList.remove('open');
+});
+// 自定义下拉: 点按钮开合, 点选项写入隐藏 input + 提交表单 (或跳转)
+document.addEventListener('click', function (e) {
+  var btn = e.target.closest('.csel-btn');
+  if (btn) {
+    var sel = btn.parentElement;
+    var open = sel.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    e.stopPropagation();
+    return;
+  }
+  var li = e.target.closest('.csel li');
+  if (li) {
+    e.preventDefault();
+    var sel = li.closest('.csel');
+    var name = sel.dataset.name, v = li.dataset.v;
+    sel.dataset.cur = v;
+    sel.querySelector('.csel-txt').textContent = li.textContent.trim();
+    Array.prototype.forEach.call(sel.querySelectorAll('li'), function (x) {
+      x.removeAttribute('aria-current');
+    });
+    li.setAttribute('aria-current', 'true');
+    sel.classList.remove('open');
+    sel.querySelector('.csel-btn').setAttribute('aria-expanded', 'false');
+    // 写隐藏 input 并提交所在表单
+    var f = sel.closest('form');
+    if (f) {
+      var h = f.querySelector('input[type=hidden][name="' + name + '"]');
+      if (!h) {
+        h = document.createElement('input'); h.type = 'hidden'; h.name = name;
+        f.appendChild(h);
+      }
+      h.value = v;
+      f.submit();
+    }
+    return;
+  }
+  var s = e.target.closest('.csel');
+  if (s) { s.classList.remove('open'); s.querySelector('.csel-btn').setAttribute('aria-expanded', 'false'); }
+});
+// 筛选即时生效: select/checkbox/radio 变化即提交; 文本输入 500ms 防抖。保留提交按钮。
+document.addEventListener('DOMContentLoaded', function () {
+  var f = document.getElementById('filters');
+  if (!f) return;
+  var t = null;
+  f.addEventListener('change', function (e) {
+    if (e.target.matches('select, input[type=checkbox], input[type=radio]')) f.submit();
+  });
+  f.addEventListener('input', function (e) {
+    if (e.target.matches('input.q, input[name=q]')) {
+      clearTimeout(t);
+      t = setTimeout(function () { f.submit(); }, 500);
+    }
+  });
+});
+// 施法动画播放: 点击 ▶ 后逐帧切换, 循环; 再点暂停。
+var _animTimer = null;
+function animPlay(btn) {
+  var box = btn.closest('.anim');
+  var img = box.querySelector('#animFrame');
+  var n = parseInt(box.dataset.frames, 10) || 1;
+  var delay = parseInt(box.dataset.delay, 10) || 100;
+  var idx = parseInt(box.dataset.i || '0', 10);
+  if (btn.dataset.on === '1') {
+    btn.dataset.on = '0'; btn.textContent = '▶ 播放';
+    clearInterval(_animTimer); _animTimer = null;
+    return;
+  }
+  btn.dataset.on = '1'; btn.textContent = '⏸ 暂停';
+  var step = function () {
+    img.src = '/img/skills_anim/' + box.dataset.sid + '/' + String(idx).padStart(3, '0') + '.png';
+    box.dataset.i = idx;
+    var l = box.querySelector('#animIdx');
+    if (l) l.textContent = idx + 1;
+    idx = (idx + 1) % n;
+  };
+  step();
+  clearInterval(_animTimer);
+  _animTimer = setInterval(step, delay);
+}
+var _monTimer = null, _monDir = 0, _monIdx = 0, _monSpeed = 1;
+var MON_ACT_ZH = { standing: '站立', walking: '行走', combat: '攻击', struck: '受击', die: '死亡' };
+function monStop() {
+  clearInterval(_monTimer); _monTimer = null;
+  var pb = document.getElementById('monPlay');
+  if (pb) { pb.dataset.on = '0'; pb.textContent = '▶ 播放'; }
+}
+function monDirs(act) { return (window.MON_ANIM && window.MON_ANIM[act]) || []; }
+function monShow() {
+  var img = document.getElementById('monFrame');
+  var dirs = monDirs(img.dataset.act);
+  var d = dirs[_monDir];
+  img.src = '/img/mon_anim/' + img.dataset.mid + '/' + img.dataset.act + '/' + d.d + '/' + String(_monIdx).padStart(3, '0') + '.png';
+  document.getElementById('monDir').textContent = d.zh;
+  document.getElementById('monDirIdx').textContent = (_monDir + 1) + '/' + dirs.length;
+  document.getElementById('monIdx').textContent = _monIdx + 1;
+  document.getElementById('monCnt').textContent = d.n;
+}
+function monAdvance() {
+  var img = document.getElementById('monFrame');
+  var act = img.dataset.act;
+  var dirs = monDirs(act);
+  _monIdx = _monIdx + 1;
+  if (_monIdx >= dirs[_monDir].n) {
+    _monIdx = 0; _monDir = _monDir + 1;
+    if (_monDir >= dirs.length) {
+      if (act === 'die') { monStop(); return; }  // 死亡: 播完停尸体帧, 不循环
+      _monDir = 0;
+    }
+  }
+  monShow();
+}
+function monStart() {
+  var img = document.getElementById('monFrame');
+  var act = img.dataset.act;
+  var delay = ((act === 'standing' || act === 'die') ? 180 : 120) * _monSpeed;
+  clearInterval(_monTimer);
+  _monTimer = setInterval(monAdvance, delay);
+}
+function monPlay(btn, mid) {
+  monStop();
+  var img = document.getElementById('monFrame');
+  var act = btn.dataset.act;
+  img.dataset.act = act; img.dataset.mid = mid;
+  _monDir = 0; _monIdx = 0;
+  monShow();
+  document.getElementById('monActZh').textContent = MON_ACT_ZH[act] || act;
+  Array.prototype.forEach.call(document.querySelectorAll('.mon-act'), function (b) {
+    b.classList.remove('on');
+  });
+  btn.classList.add('on');
+  var pb = document.getElementById('monPlay');
+  pb.disabled = false; pb.dataset.on = '0'; pb.textContent = '▶ 播放';
+  // 点动作按钮即自动播放该动作
+  pb.click();
+}
+function monPlayBtn(btn) {
+  var img = document.getElementById('monFrame');
+  if (!img.dataset.mid || monDirs(img.dataset.act).length === 0) return;
+  if (btn.dataset.on === '1') { monStop(); return; }
+  btn.dataset.on = '1'; btn.textContent = '⏸ 暂停';
+  monStart();
+}
+// 速度分段按钮: 正常1x / 慢2x / 极慢4x, 播放中切换即时生效
+function monSpeed(btn) {
+  _monSpeed = parseInt(btn.dataset.s, 10) || 1;
+  Array.prototype.forEach.call(document.querySelectorAll('#monSpeedGrp .spd'), function (b) {
+    b.classList.remove('on');
+  });
+  btn.classList.add('on');
+  var pb = document.getElementById('monPlay');
+  if (pb && pb.dataset.on === '1') monStart();
+}
+// 页面加载后自动播放默认动作 (行走)
+window.addEventListener('load', function () {
+  var pb = document.getElementById('monPlay');
+  if (pb) { pb.disabled = false; pb.click(); }
+});
+</script>
+</head>
+<body>
+<header><nav>
+<a href="/index.html" >首页</a>
+<a href="/maps.html" >地图</a>
+<a href="/monsters.html" >怪物图鉴</a>
+<a href="/items.html" >装备</a>
+<a href="/skills.html" >技能</a>
+<a href="/npcs.html" >NPC</a>
+<a href="/quests.html" >任务</a>
+<a href="/companions.html" >宠物与坐骑</a>
+<a href="/stores.html" >商店</a>
+<a href="/classes.html" >职业</a>
+<a href="/sets.html" >套装</a>
+<a href="/moves.html" >传送</a>
+<a href="/library.html" >资源库</a>
+<a href="/diff.html" >差异裁剪</a>
+<a href="/terms.html" >术语</a>
+<a href="/stages.html" >阶段对照</a>
+</nav></header>
+<main>
+<h1>阶段对照</h1>
+<p class="lead">EI 2.0 阶段调研结论（2026-08-07）</p>
+<div class="panel">
+<h1>22 · 传奇 EI 2.0 资料整理:地图 / 装备 / 技能到哪个阶段</h1><blockquote>调研日期: 2026-08-07<br>目的: 确认《传奇 EI 2.0》(The Evil's Illusion,恶魔的幻影)的地图、装备、技能体系发展到哪个阶段,并对照 Zircon 本地数据库(System.db)所处内容阶段。<br>数据来源: ① 网络资料(详见文末「参考来源」,网页正文/图片已归档至 <code>docs/research/ei2-research/</code>);② 本地实测(<code>Tools/SystemDbProbe</code> dump <code>/tmp/zircon-server/Database/</code>,共 244 地图 / 1078 物品 / 174 魔法 / 309 怪物,副本在 <code>docs/research/ei2-research/data/</code>)。</blockquote><hr><h2>1. EI 2.0 是什么:身份与历史</h2><table><tr><th>项</th><th>内容</th></tr><tr><td>全称</td><td><code>Legend of Mir II: The Evil's Illusion</code>(恶魔的幻影),缩写 <strong>EI</strong></td></tr><tr><td>开发商</td><td>韩国 WEMADE(维美德),《热血传奇》(Mir2)的官方续作</td></tr><tr><td>时间</td><td>2001 年开发完成,次年在全球公测(盛大代理中文化,2001 年上线)</td></tr><tr><td>命运</td><td>盛大同 WEMADE 因纠纷中断代理,游戏改头换面由<strong>光通代理成为《传奇3》</strong>——所以 EI 2.0 是 Mir2 → Mir3 之间的过渡版本,英文社区(LOMCN)直接把它归入 Mir3 系</td></tr><tr><td>中文圈语境</td><td>老玩家口中的「传奇 ei2.0」指 2001 年那个版本;LOMCN 确认网上流传的「Mir3 2010 源码」其实就是 EI 2.0 时代的老服务端(C++ 编写、需 VS2010、内容不完整)</td></tr></table><blockquote>来源: ei2.cc 官网项目背景;iamcheyan.com 复刻项目;LOMCN 帖子 <code>mir3-2010-source-code.100251</code>。</blockquote><p><strong>结论: EI 2.0 = 传奇3 的前身 / 初代版本。</strong> 讨论「EI 2.0 的内容阶段」等价于讨论「传奇3 内容从哪开始、到哪里」。</p><hr><h2>2. 版本演进时间线(内容阶段划分)</h2><table><tr><th>阶段</th><th>时间</th><th>代表内容</th><th>备注</th></tr><tr><td><strong>EI 2.0(原生)</strong></td><td>2001–2002</td><td>比奇城/比奇矿、盟重、祖玛寺庙、沃玛神殿、赤月山谷、石阁阵、蚂蚁洞穴、<strong>真天宫和黑度宫</strong>、潘夜神殿/石窟、<strong>幽灵船(神舰)</strong>、诺玛遗址、罪孽洞穴、虫峡谷、绝命谷/万年谷、东部石矿、天然洞穴/半兽人洞穴/废矿</td><td>三职业(战/法/道);画面黑雾;召唤系为骷髅+神兽</td></tr><tr><td><strong>传奇3(光通版)</strong></td><td>2003 起</td><td>EI 2.0 地图之上续更:龙渊(龙帝/龙后)、冰封圣殿(冰宫)、赤月谷深化、道馆、潘夜岛、北方雪原、失乐园;引入天气效果与第四职业<strong>刺客</strong></td><td>17173 专区收录的地图全集即此层</td></tr><tr><td><strong>3G / 国际服系</strong></td><td>2005 前后</td><td>刺客体系完善(柳叶/幽灵步/召唤傀儡/恶魔降临)、宠物系统(伴随兽)、马系统(马甲)、武器打造/精炼</td><td>本地库 Companion 系 / HorseArmour / RefineSpecial 属此层</td></tr><tr><td><strong>西沙版本(官方续更)</strong></td><td>2021(盛大公告 20210623;2024-09 寻龙探宝区实装)</td><td><strong>西部沙漠、西部沙漠地下 1-3、地下城市 1-4、地下矿山 1-3、地下暗阁</strong>,地天灭王 / 暗之地天灭王(每日 2/6/10/14/18/22 点),掉落破山档武器、天赐档防具、三台档饰品;强化技能(潜能点)、阵法系统、沉没的幽灵船副本</td><td>传奇3 官方最后一次大规模地图更新</td></tr><tr><td><strong>海外/私服原创层</strong></td><td>各私服自行</td><td>苏美尔文明系(Enheduanna/Puabi/Urukhia/Zauhk)、Sama(萨玛)系、Odyn 系列装备、遗忘修道院、失落之地</td><td>官方资料查无「苏美尔版本」,判断为私服/海外服原创</td></tr></table><blockquote>西沙版本依据: 盛大《传奇3》西沙版本公告页 <code>actmir3.web.sdo.com/project/banben/20210623</code>;17173 报道 <code>mir3.17173.com/content/2024-09-04/20240904181701727.shtml</code>(寻龙探宝区 2024-09-03 更新、09-08 首杀)。</blockquote><hr><h2>3. 地图:网络权威清单 vs 本地 244 张</h2><h3>3.1 网络侧:传奇3 官方地图体系(17173 专区)</h3><p>迷宫地图(17173 传奇3 专区 <code>mir3.17173.com/map/map.htm</code>)列出的<strong>官方地图全集</strong>:</p><ul><li>东部石矿 | 天然洞穴、半兽人洞穴和废矿 | 银杏废矿 | 虫峡谷 | 绝命谷和万年谷 | 矿山</li><li>赤月山谷 1/2/3 | 石阁阵 | 沃玛神殿 | 祖玛神殿 | 蚂蚁洞穴</li><li>潘夜神殿 | 潘夜石窟 | <strong>真天宫和黑度宫</strong> | 罪孽洞穴 | <strong>神舰</strong> | <strong>诺玛遗址</strong></li></ul><p>复刻版(ei2.cc 攻略页)补充:比奇矿区、盟重土城、祖玛寺庙、石墓阵、赤月魔穴、沃玛森林、未知暗殿、幽灵船、真天宫、失乐园、道馆、潘夜岛、北方雪原;BOSS 表含尸王/白野猪/祖玛教主/石墓尸王/赤月恶魔/沃玛教主/真·沃玛教主/霸王幽灵/震天魔神/地狱魔王/潘夜牛魔王/冥血魔王/火影。</p><h3>3.2 本地实测:244 张地图(按地域归类)</h3><blockquote>全为英文描述(原版 Mir3 命名)。<code>FileName</code> 为 MapInfo 主键,括号内为 Description。</blockquote><p><strong>城镇与地表(18)</strong></p><table><tr><th>FileName</th><th>名称</th><th>FileName</th><th>名称</th></tr><tr><td>0</td><td>Bichon Town 比奇城</td><td>3</td><td>Sabuk Keep 沙巴克</td></tr><tr><td>1</td><td>Lost Paradise 失乐园</td><td>4</td><td>Numa Village 诺马村</td></tr><tr><td>2</td><td>Banya Village 潘夜村</td><td>5</td><td>Desert Mud Fortress 沙漠土城</td></tr><tr><td>7</td><td>Infernal Island 炼狱岛</td><td>8</td><td>Frost Village 冰雪村</td></tr><tr><td>10</td><td>Bichon Castle 比奇城堡</td><td>11</td><td>Taoist Temple 道馆</td></tr><tr><td>12</td><td>Banya Island 潘夜岛</td><td>13</td><td>Banyo Island 潘约岛</td></tr><tr><td>14</td><td>Toxic Docks 毒港</td><td>15</td><td>(未命名)</td></tr><tr><td>16</td><td>Western Arids 西部荒野(西沙)</td><td>17</td><td>Lost Oasis 失落绿洲</td></tr><tr><td>18</td><td>Arid Flats 干涸平原</td><td>19</td><td>Lost Village 失落村庄</td></tr></table><p><strong>城内建筑</strong>: 0_000 市政厅、0_001 左翼、0_002 右翼、3_000 沙巴克领地、5_000 沙漠领地、8_001 圣殿入口(old)、8_002 圣殿入口、11_002 武器店、11_003 药水商、11_004 铠甲店、11_005 杂货商、14_000 刺客藏身处。</p><p><strong>地表野图</strong>: D001 幽灵森林、D002 沙漠、D003 失乐园森林、D004 潘夜谷南、D005 故乡兵营、D006 熔岩地带 1、D007 熔岩地带 2、D008 龙渊入口、D009 毒地、E01/E02 北路、E11/E12 南路、D4000 南部沙丘、D4001 南部荒原、D4002 南部海岸、D4003 南部哨卡、D4101 南墙、D4102 迷失之路、D3400 失落之地、D3400_1 失落之地 2、ER51_Ice 失落之地 3、ID3_014 The Wall、ID3_024 The Wall 2、GM GM 图、16_001 Beyond Shore、16_002 西海岸、16_003 西关、19_1 Lost Pass。</p><p><strong>矿洞系</strong>: D101-D103 比奇矿 1-3、D201-D203 废矿 1-3、ID7_000-004 石英矿 1-4+殿。</p><p><strong>潘夜系(潘夜神殿 10 层)</strong>: D1001-D1012(含 3 层西/东、9 层西/东、大殿)、D121-D123 潘夜洞、D601-D605 潘夜石窟 1-5。</p><p><strong>祖玛系</strong>: D1101-D1106(1-5 层 + 祖玛大殿)。</p><p><strong>失乐园洞</strong>: D111-D113(1-3 层)。</p><p><strong>真天宫系(招牌地图)</strong>: D1200 真天宫 1 层、D12011-D12014 2 层四向、D12021-D12024 3 层四向、D12031-D12033 4 层三向、D12041-D12042 5 层、D1205 6 层、D1206 真天宫大殿;另 D2301-D2304 高丽洞(Goru Cave)、D2401-D2404 玄月殿(Hyunmoon Temple)。</p><p><strong>黑宫系</strong>: D1301-D1305 黑宫 1-4 层 + 大殿。</p><p><strong>幽灵船(神舰,招牌地图)</strong>: D1401 入口、D1402-D1405 4/3/2/1 层、D1406 甲板。</p><p><strong>诺马系</strong>: D1501-D1505 诺马遗迹 1-5、D1601-D1604 诺马丘陵/谷/谷/要塞。</p><p><strong>炼狱</strong>: D1802 Purgatory。</p><p><strong>西沙系(2021 官方更新)</strong>: D2001/D20011/D20012 沙漠地牢 1-3、D2002/D20021-D20023 地下城 1-4、D2003/D20031-D20032 地下矿 1-3、D2004 沙漠王殿(地天灭王层)。</p><p><strong>冰封系</strong>: D2101-D2107 冰封地牢 1-6+殿、D2201-D2205 冰封圣殿 1-3+旧殿+女王殿。</p><p><strong>其他洞窟/BOSS 场景</strong>: D301-D303 跳蚤洞、D401-D404 蚂蚁洞四向、D501-D504 乌玛殿、D701-D705 石刻墓碑 1-4+殿、D801-D805 绝望谷 1-4+生死殿、D901-D905 赤月谷 1-4+谷、D2501-D2503 幽谷(Departed Valley)、D2601 潘夜洞、D2900-D2907 巢穴(入口+1-5+巢)、D3001-D3006 龙渊 1-4+殿+4 变体(D3005_BH/CR/HM/JJ)、ID9_00 废弃小镇、ID9_01/02 遗忘修道院 1-2。</p><p><strong>特殊/预留</strong>: 15_001-15_003(未命名)、D3101/D3102/D3103/D3106/D3901-D3906(预留新图)。</p><h3>3.3 阶段结论(地图)</h3><p>本地 244 张地图<strong>覆盖 EI 2.0 原生全部官方地图</strong>(真天宫、黑宫、幽灵船、诺马、潘夜、祖玛、沃玛、赤月、石阁阵、蚂蚁洞、虫峡谷、矿系),<strong>且包含</strong>:</p><ul><li>传奇3 新增: 龙渊、冰封圣殿/地牢、道馆、潘夜岛、北方雪原、失乐园深化;</li><li><strong>2021 西沙版本: 西部荒野(Western Arids)、沙漠地牢、地下城 1-4、沙漠王殿</strong>;</li><li>海外/私服原创: 苏美尔/萨玛场景(失落之地、修道院、巢穴、龙渊变体)、预留新图区。</li></ul><p>→ <strong>地图阶段 = 传奇3 后期全量(含 2021 西沙),并带私服原创扩展。</strong> 未发现本地库缺任何 EI 2.0 招牌地图。</p><hr><h2>4. 装备:网络掉落线索 vs 本地 1078 件</h2><h3>4.1 网络侧:装备档位线索</h3><ul><li>EI 2.0 时代: 复刻版官网自述服务器定制「传奇2 原版武器,例如屠龙、龙牙」——EI 2.0 装备体系与 Mir2 系(祖玛→赤月→屠龙/龙牙级)同源,传奇3 起才有独立装备线。</li><li>西沙版本公告(2021): <strong>武器打造</strong>(36初级券+28中级券+1凭证四→NPC 阿翔),沙漠流星刀/沙漠魔刃/沙漠封魔剑(需 60 级、可制炼 9)、破山剑(破坏18-66,稀世)/天神法杖/泰伦拂尘(制炼 20);防具雷霆战甲/沐雨法袍/云霏道衣(需 65)、勇霖银甲/明光咒衣/赤贯道衣(积分)、虎面头盔/玄冥靴/天问腰带(60 级)。档位命名:<strong>破山档武器、天赐档防具、三台档饰品</strong>。</li><li>复刻版作者自述: 武器元素系魔法受引擎限制未实现(暗示后期版本存在元素武器强化体系)。</li></ul><h3>4.2 本地实测:1078 件物品类型分布</h3><table><tr><th>类型</th><th>数量</th><th>类型</th><th>数量</th></tr><tr><td>Book 技能书</td><td>173</td><td>Emblem 徽章</td><td>9</td></tr><tr><td>Weapon 武器</td><td>124</td><td>HorseArmour 马甲</td><td>7</td></tr><tr><td>Consumable 消耗品</td><td>118</td><td>Meat 肉类</td><td>6</td></tr><tr><td>Armour 铠甲</td><td>104</td><td>System 系统物品</td><td>5</td></tr><tr><td>Nothing 空/占位</td><td>104</td><td>RefineSpecial 特殊精炼</td><td>5</td></tr><tr><td>Ring 戒指</td><td>100</td><td>CompanionFood/Bag/Head/Back 宠物四件套</td><td>10</td></tr><tr><td>Necklace 项链</td><td>92</td><td>Ore 矿石</td><td>9</td></tr><tr><td>Bracelet 手镯</td><td>86</td><td>Currency 货币</td><td>3</td></tr><tr><td>Helmet 头盔</td><td>32</td><td>Poison 毒药</td><td>2</td></tr><tr><td>Torch 火把</td><td>24</td><td>Flower 花</td><td>2</td></tr><tr><td>Shoes 鞋</td><td>21</td><td>ItemPart 部件</td><td>1</td></tr><tr><td>DarkStone 黑铁石</td><td>20</td><td>合计</td><td><strong>1078</strong></td></tr><tr><td>Shield 盾牌</td><td>12</td><td></td><td></td></tr><tr><td>Amulet 护身符</td><td>9</td><td></td><td></td></tr></table><blockquote>特征: 173 本技能书 ≈ 174 个魔法一一对应(每技能一本书);护身符(Amulet)、黑铁石(DarkStone)、矿石、精炼(RefineSpecial)、马甲(HorseArmour)、宠物四件套齐全 → <strong>后期版本特征明显</strong>(宠物、马、精炼系统都是传奇3 中后期才有)。</blockquote><h3>4.3 本地顶级装备(非 Common 稀有度,按系归类)</h3><ul><li><strong>龙帝级</strong>: Blade Of The Dragon Lord(龙帝之刃)、Dragon Bone Staff(龙骨法杖)、Talon Staff Of A'Ryong(阿龙爪杖)</li><li><strong>龙渊系</strong>: Sword Of Abyss / Ambitious Sword Of Abyss(深渊之刃)、Glaive Of Doom(毁灭之刃)、Warden's Fan Of Obedience(道士扇)、Lance Of Obedience</li><li><strong>Sama 系</strong>: Blades Of Sama / Burning Blade Of Sama / Unholy Blade Of Sama / Wraith Blade Of Sama</li><li><strong>四职业顶配</strong>: Warrior's/Wizard's/Taoist's/Assassin's Edge(四职业之刃)、Valkyrie Blade of Reckoning、StormCaller The Sky Blade、Crescent Moon Cry of the Fallen、Lifebinder The Ancient Healer、Nemesis The Blade of Betrayal、Deluge Winter's Might、Celestia Fan of the Heavens、Chaos The Spiral Death</li><li><strong>Odyn 系列</strong>: Odyn Son / Mythical / Elemental / Sin</li><li><strong>其他神兵</strong>: Valhalla The Last Hope、Spellkeeper Knowledge of the Ancients、Moonlight Light in the Darkness、Echo Blades of Torment、Claw Of The Demon God、Twisted Blade Of Souls、Celestial Blade、Calamity、Fury Blade、Halberd Of Integrity、Falcon Glaive、Heavenly Blade Of Tranquility</li><li><strong>铠甲</strong>: Armour Of Abyss、Tunic of the Blood God、Armour of the Blessed King/Queen、Overlord's Battleplate、Titan Slayer 系(战/法两套)、Sun Keeper、Archon's/Elementalist's Battleplate、Wyvern Scale Armour、Blazing Raiment Of Phoenix、Demon Hunter's Shroud、Ghost Armour、Armour of Arcane Fury、Tunic of Whispers、Vestment of Shattered Souls;节日装 Santa Outfit / FootBall Kit</li></ul><h3>4.4 阶段结论(装备)</h3><p>本地装备体系<strong>远超 EI 2.0 原生档位</strong>(原生仅到屠龙/龙牙级),已含:</p><ul><li>传奇3 后期全套(龙渊/龙帝/冰宫/赤月深化档);</li><li><strong>西沙档位线索(破山/天赐/三台对应的高级武器防具、精炼强化)</strong>;</li><li>私服原创层(Sama 系、Odyn 系、苏美尔主题武器)。</li></ul><p>→ <strong>装备阶段 = 传奇3 后期全量 + 私服原创扩展。</strong> 1078 件规模(92 项链/86 手镯/100 戒指)表明是完整后期掉落表,而非 EI 2.0 初版。</p><hr><h2>5. 技能:本地 174 个魔法 = 四职业完整技能树</h2><blockquote>网络对照: EI 2.0 原生只有战/法/道三职业(无刺客),刺客是传奇3 引入;「召唤骷髅→神兽→恶魔」的道士召唤链与战士「龙影/莲月/破血/铁布衫」均为传奇3 技能体系标志。本地 MagicInfo 按职业分组如下(中文名按传奇3 通行译名,部分为意译):</blockquote><h3>5.1 战士 Warrior(43)</h3><ul><li>基础链: Swordsmanship 基本剑术 → Slaying 攻杀剑术 → Thrusting 刺杀剑术 → Half Moon 半月弯刀 → Shoulder Dash 野蛮冲撞 → Flaming Sword 烈火剑法 → Dragon Rise 龙影剑法 → Blade Storm 莲月剑法 → Destructive Surge 破血狂杀(→Advanced 强化)</li><li>防御/辅助: Defiance 铁布衫(→Advanced)、Reflect Damage 移花接玉(→Advanced)、Endurance 金钟罩、Might、Beckon 召唤、Swift Blade、Assault、Fetter、Interchange 乾坤大挪移、Mass Beckon、Invincibility 无敌、Seismic Slam、Crushing Wave、Elemental Swords、Advanced Potion Mastery、Defensive Mastery、Physical/Magic Immunity、Defensive Blow</li></ul><h3>5.2 法师 Wizard(47)</h3><ul><li>基础链: Fire Ball 火球术 → Lightning Ball 雷电术 → Ice Bolt 冰箭术 → Gust Blast 风震天 → Repulsion 抗拒火环 → Electric Shock 诱惑之光 → Teleportation 瞬息移动 → Adamantine Fire Ball 大火球 → Thunder Bolt 雷光术 → Ice Blades 冰咆哮 → Cyclone 龙卷风 → Scorched Earth 焰天火雨 → Lightning Beam 疾光电影 → Frozen Earth 冰震大地(→Greater 强化) → Fire Wall 火墙 → Expel Undead 超度亡灵 → Magic Shield 魔法盾(→Superior 高级) → Fire Storm → Lightning Wave → Ice Storm → Dragon Tornado → Chain Lightning 连环闪电 → Meteor Shower 流星火雨 → Judgement Of Heaven 天罡气 → Thunder Storm 雷霆风暴 → Fire Bounce 火焰弹射 → Elemental Hurricane → Burning → Shock → Lightning Strike</li><li>后期: Renounce 迷魂咒、Mirror Image 魔法分身、Ice Rain、Frost Bite、Asteroid、Storm、Tornado</li></ul><h3>5.3 道士 Taoist(45)</h3><ul><li>基础链: Heal 治愈术 → Spirit Sword 精神力战法 → Poison Dust 施毒术 → Explosive Talisman 灵魂火符 → Evil Slayer 召唤骷髅(→Greater 超强→Empowered 强化) → Invisibility 隐身术 → Magic Resistance 魔法防御 → Mass Invisibility 集体隐身 → Trap Octagon 困魔咒 → Combat Kick 气功波 → Elemental Superiority 幽灵盾 → Mass Heal 群体治愈 → Blood Lust 嗜血术 → Resurrection 复活术 → Purification 净化术 → Celestial Light 圣言术 → Life Steal 吸血 → Cursed Doll 诅咒娃娃 → Soul Resonance 魔魂附体 → Parasite → Spiritualism 通灵</li><li><strong>召唤链(招牌)</strong>: Summon Skeleton 召唤骷髅 → Summon Jin Skeleton 金甲骷髅 → Summon Shinsu 召唤神兽 → Summon Demonic Creature 召唤恶魔 → Summon Dead 召唤死灵 + Corpse Exploder 爆裂尸、Demon Explosion、Demonic Recovery</li><li>后期: Empowered Explosive Talisman/Evil Slayer/Purification/Resurrection/Celestial Light、Strength Of Faith、Infection、Neutralize(→Empowered)、Dark Soul Prison、Searing Light</li></ul><h3>5.4 刺客 Assassin(39)</h3><ul><li>基础链: Willow Dance 柳叶舞 → Vine Tree Dance 柳枝舞 → Discipline → Poisonous Cloud 毒雾 → Full Bloom → Cloak 隐身 → White Lotus 白莲 → Calamity Of Full Moon 月华 → Wraith Grip → Red Lotus 红莲 → Hell Fire 地狱火 → Pledge Of Blood → Rake → Sweetbrier → Summon Puppet 召唤傀儡 → Karma 业报 → Touch Of The Departed 归魂术 → Waning Moon 残月 → Ghost Walk 幽灵步 → Elemental Puppet 元素傀儡 → Change Of Seasons 换季 → Release 解放 → Flame Splash → Bloody Flower → The New Beginning → Dance Of Swallow 燕子舞 → Dark Conversion → Dragon Repulse → Advent Of Demon 恶魔降临 → Advent Of Devil 魔尊降临 → Abyss → Flash Of Light → Stealth 潜行 → Evasion 闪避 → Raging Wind</li><li>后期: Massacre、Art of Shadows、Dragon Blood、Fatal Blow、Last Stand、Magic Combustion、Vitality、Chain、Concentration、Dual Weapon Skills 双持、Containment、Dragon Wave、Hemorrhage、Burning Fire、Chain Of Fire</li></ul><h3>5.5 阶段结论(技能)</h3><p>本地 174 魔法<strong>覆盖 EI 2.0 原生三职业技能树全部</strong>(含强化/高级变体),<strong>并含</strong>:</p><ul><li>传奇3 刺客职业完整体系(39 个,含后期双持/魔火/龙血);</li><li>道士召唤链到「召唤恶魔/死灵」的后期深度;</li><li>后期强化技能(Advanced/Empowered/Superior 前缀变体)。</li></ul><p>→ <strong>技能阶段 = 传奇3 后期全量(四职业),无 EI 2.0 原生技能缺失。</strong></p><hr><h2>6. 总结论</h2><table><tr><th>维度</th><th>阶段判定</th><th>依据</th></tr><tr><td>地图</td><td>传奇3 后期全量(含 2021 西沙)+ 私服原创扩展</td><td>244 张,含真天宫/幽灵船/诺马/潘夜/祖玛/沃玛/赤月/石阁阵全部官方图 + 龙渊/冰宫/西沙/失落之地</td></tr><tr><td>装备</td><td>传奇3 后期全量 + 私服原创扩展</td><td>1078 件,含破山级/龙帝级/Sama/Odyn 系;宠物/马/精炼系统齐全</td></tr><tr><td>技能</td><td>传奇3 后期全量(四职业)</td><td>174 魔法,含刺客 39、召唤链到恶魔、强化变体</td></tr></table><p><strong>一句话: Zircon 本地数据库的内容阶段 = 传奇3 后期全量(追上 2021 官方西沙版本),并叠加了海外/私服原创内容(苏美尔、Sama、Odyn)。</strong> EI 2.0 原生内容(2001 版)作为地基全部保留。</p><hr><h2>7. 参考来源</h2><table><tr><th>#</th><th>来源</th><th>URL</th><th>归档</th></tr><tr><td>1</td><td>ei2.cc 复刻版官网(项目背景)</td><td>http://www.ei2.cc/</td><td>web/01</td></tr><tr><td>2</td><td>ei2.cc 地图攻略(BOSS 刷新表/幽灵船/北方雪原)</td><td>http://www.ei2.cc/quest.html</td><td>web/02</td></tr><tr><td>3</td><td>17173 传奇3 地图专区</td><td>https://mir3.17173.com/map/map.htm</td><td>web/03</td></tr><tr><td>4</td><td>盛大《传奇3》西沙新版本公告</td><td>https://actmir3.web.sdo.com/project/banben/20210623/index.html</td><td>web/04</td></tr><tr><td>5</td><td>17173 寻龙探宝区西沙版本公告</td><td>https://mir3.17173.com/content/2024-09-04/20240904181701727.shtml</td><td>web/05</td></tr><tr><td>6</td><td>iamcheyan 恶魔的幻影复刻项目</td><td>https://iamcheyan.com/app/mir/</td><td>web/06</td></tr><tr><td>7</td><td>LOMCN MIR3 2010 source code 帖</td><td>https://www.lomcn.net/forum/threads/mir3-2010-source-code.100251/</td><td>web/07</td></tr><tr><td>8</td><td>本地 System.db dump</td><td>Tools/SystemDbProbe 生成</td><td>data/</td></tr></table><blockquote>注: 贴吧(tieba.baidu.com)EI 2.0 历史帖 403 无法访问;「苏美尔版本」官方资料查无,已判定为私服原创(见 §2)。</blockquote>
+</div>
+</main>
+<footer>EI 传奇3.0 客户端百科 · 数据源: Mud3 服务端 Envir / Zircon System.db / EI 客户端资源 · 本地服务 · 构建 2026-08-11T09:04:42+00:00</footer>
+</body></html>

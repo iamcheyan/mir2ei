@@ -1,0 +1,9 @@
+# 运行产物 (本地生成, 不入库)
+__pycache__/
+*.pyc
+/tmp/
+nohup.out
+
+# 大体积中间产物 (由 scripts/ 重新生成)
+# 怪物动画帧 2.3G, 不入库
+# 如需本地运行 WikiServer, 设置 MIR2EI_DATA/MIR2EI_THUMBS/MIR2EI_IMGS 环境变量
