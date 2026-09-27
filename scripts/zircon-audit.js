@@ -131,6 +131,12 @@
   function renderCategoryStats() {
     const host = byId("category-stats");
     host.replaceChildren();
+    const confirmedByCategory = new Map(CATEGORIES.map(([key]) => [key, 0]));
+    for (const record of state.records) {
+      if (reviewFor(record.record_id).status !== "confirmed_correct") continue;
+      const count = confirmedByCategory.get(record.category);
+      if (count !== undefined) confirmedByCategory.set(record.category, count + 1);
+    }
     for (const [key, label] of CATEGORIES) {
       const summary = state.audit.summary[key] || {};
       const card = element("article", "category-card");
@@ -145,7 +151,7 @@
       details.append(metric("缺译", summary.missing_zh || 0, ""));
       details.append(metric("未链接键", summary.unlinked_translation_keys || 0, ""));
       if (key === "maps") details.append(metric("补充未链接", summary.unlinked_supplemental_website_records || 0, ""));
-      card.append(details, element("div", "category-sub", `百科页 ${summary.website_entities || 0} · 人工确认正确 ${summary.confirmed_correct || 0}`));
+      card.append(details, element("div", "category-sub", `百科页 ${summary.website_entities || 0} · 人工确认正确 ${confirmedByCategory.get(key)}`));
       host.append(card);
     }
   }
@@ -483,22 +489,34 @@
         note.focus();
         return;
       }
-      storeReview(recordId, select.value, note.value);
-      feedbackFor(recordId, "已保存在本浏览器", "saved");
-      updateReviewBadges();
+      const saved = storeReview(recordId, select.value, note.value);
+      renderCategoryStats();
+      state.page = 0;
+      render();
+      feedbackFor(recordId, saved ? "已保存在本浏览器" : "存储失败；请导出审校 JSON。", saved ? "saved" : "error");
     });
     byId("results").addEventListener("input", (event) => {
       if (!event.target.matches("[data-review-note]")) return;
       const note = event.target;
       const recordId = note.dataset.recordId;
       const select = byIdForRecord("[data-review-status]", recordId);
+      const previousStatus = select.value;
       if (!note.value.trim() && select.value !== "not_reviewed") {
         select.value = "not_reviewed";
         feedbackFor(recordId, "依据已清空，人工状态恢复为尚未审校。", "error");
       }
-      storeReview(recordId, select.value, note.value);
-      feedbackFor(recordId, "正在保存本地记录…", "");
-      updateReviewBadges();
+      const statusChanged = select.value !== previousStatus;
+      const saved = storeReview(recordId, select.value, note.value);
+      if (statusChanged) {
+        renderCategoryStats();
+        state.page = 0;
+        render();
+      }
+      feedbackFor(
+        recordId,
+        saved ? (statusChanged ? "依据已清空，人工状态恢复为尚未审校。" : "已保存在本浏览器") : "存储失败；请导出审校 JSON。",
+        saved ? "saved" : "error",
+      );
     });
     byId("export-reviews").addEventListener("click", exportReviews);
     byId("import-reviews").addEventListener("change", importReviews);
@@ -517,19 +535,6 @@
     feedback.classList.toggle("error", stateName === "error");
   }
 
-  function updateReviewBadges() {
-    for (const card of byId("results").querySelectorAll(".record-card")) {
-      const recordId = card.dataset.recordId;
-      const review = reviewFor(recordId);
-      const badges = card.querySelector(".record-badges");
-      const old = badges.querySelector(".review-status-badge");
-      if (old) old.remove();
-      if (review.status !== "not_reviewed") {
-        const badge = element("span", "audit-badge review-status-badge", REVIEW_LABELS[review.status]);
-        badges.append(badge);
-      }
-    }
-  }
 
   function exportReviews() {
     const output = {
@@ -566,8 +571,16 @@
         if (review.status !== "not_reviewed" && !note) { ignored += 1; continue; }
         accepted[recordId] = { status: review.status, note, updated_at: String(review.updated_at || parsed.exported_at || "") };
       }
+      const previousReviews = state.reviews;
       state.reviews = accepted;
-      window.localStorage.setItem(state.reviewKey, JSON.stringify(state.reviews));
+      try {
+        window.localStorage.setItem(state.reviewKey, JSON.stringify(state.reviews));
+      } catch (error) {
+        state.reviews = previousReviews;
+        throw error;
+      }
+      renderCategoryStats();
+      state.page = 0;
       render();
       flash(`已导入 ${Object.keys(accepted).length} 条；忽略 ${ignored} 条无效记录。`, "saved");
     } catch (error) {
