@@ -1,0 +1,97 @@
+{
+  "names": {
+    "items": {
+      "Afterlife": {"zh": "来世", "ja": "来世"},
+      "Stat Extractor": {"zh": "属性提取器", "ja": "ステータス抽出器"},
+      "Missing Shard": {"ja": "欠片"},
+      "Uncatalogued Item": {"zh": "未收录物品", "ja": "未収録アイテム"},
+      "Untranslated Token": {"zh": "Untranslated Token", "ja": "未翻訳トークン"}
+    },
+    "monsters": {
+      "Pig": {"zh": "猪", "ja": "ブタ"},
+      "Pachon": {"zh": "帕琼", "ja": "パチョン"},
+      "SummonPuppet": {"zh": "召唤傀儡", "ja": "召喚パペット"},
+      "Unlisted Beast": {"zh": "未列出怪物", "ja": "未登録の獣"}
+    },
+    "npcs": {
+      "Maddox": {"zh": "马多克斯", "ja": "マドックス"},
+      "Unlisted NPC": {"zh": "未列出NPC", "ja": "未登録NPC"}
+    },
+    "magics": {
+      "Swordsmanship": {"zh": "基本剑术", "ja": "基本剣術"},
+      "Potion Mastery": {"zh": "药剂精通", "ja": "ポーション熟練"}
+    },
+    "maps": {
+      "Bichon Town": {"zh": "比奇县", "ja": "ビチョン町"},
+      "试练场": {"zh": "试练场", "ja": "試練場"}
+    }
+  },
+  "wiki_all": {
+    "ItemInfo": {"rows": [
+      {"Index": 685, "ItemName": "Afterlife", "ItemType": "Weapon", "RequiredClass": "Warrior", "Shape": 42, "Image": 1106, "Price": 80000},
+      {"Index": 1092, "ItemName": "Stat Extractor", "ItemType": "Consumable", "Shape": 19, "Image": 3038},
+      {"Index": 1093, "ItemName": "Stat Extractor", "ItemType": "Consumable", "Shape": 20, "Image": 3039},
+      {"Index": 777, "ItemName": "Missing Shard", "ItemType": "Material", "Shape": 1, "Image": 0},
+      {"Index": 999, "ItemName": "Uncatalogued Item", "ItemType": "Material", "Shape": 2, "Image": 7},
+      {"Index": 1002, "ItemName": "Untranslated Token", "ItemType": "Material", "Shape": 3, "Image": 8}
+    ]},
+    "MonsterInfo": {"rows": [
+      {"Index": 9, "MonsterName": "Pig", "Image": "Pig", "Level": 6, "AI": 2, "IsBoss": false},
+      {"Index": 189, "MonsterName": "Pig", "Image": "Companion_Pig", "Level": 0, "AI": -2, "IsBoss": false},
+      {"Index": 196, "MonsterName": "Pachon ", "Image": "Companion_BanyoLordGuzak", "Level": 0, "AI": -2},
+      {"Index": 140, "MonsterName": "SummonPuppet", "Image": "None", "Level": 250, "AI": 51},
+      {"Index": 888, "MonsterName": "Unlisted Beast", "Image": "unlisted", "Level": 5, "AI": 1}
+    ]},
+    "NPCInfo": {"rows": [
+      {"Index": 276, "NPCName": "Maddox", "Image": 27, "FaceImage": 0, "Region": "Refine Smith", "EntryPage": "Weapon Refiner"}
+    ]},
+    "MagicInfo": {"rows": [
+      {"Index": 1, "Name": "Swordsmanship", "Icon": 4, "Class": "Warrior", "School": "Passive"},
+      {"Index": 2, "Name": "Potion Mastery", "Icon": 262, "Class": "Warrior", "School": "Passive"}
+    ]},
+    "MapInfo": {"rows": [
+      {"Index": 1, "FileName": "0", "Description": "Bichon Town", "PlayerDescription": "Bichon Town", "MiniMap": 1},
+      {"Index": 615, "FileName": "01_003", "Description": "试练场", "PlayerDescription": "试练场", "MiniMap": 0},
+      {"Index": 617, "FileName": "02_001", "Description": "试练场", "PlayerDescription": "试练场", "MiniMap": 0}
+    ]}
+  },
+  "wiki_data_v2": {
+    "items": [
+      {"id": 685, "name": "Afterlife", "zh": "来世", "category": "weapons", "type_zh": "武器", "img": {"lib": "StoreItem.wil", "frame": 1106}},
+      {"id": 1092, "name": "Stat Extractor", "zh": "属性提取器", "img": {"lib": "StoreItem.wil", "frame": 3039}},
+      {"id": 1093, "name": "Stat Extractor", "zh": "属性提取器", "img": {"lib": "StoreItem.wil", "frame": 3039}},
+      {"id": 777, "name": "Missing Shard", "zh": "", "img": null},
+      {"id": 999, "name": "Uncatalogued Item", "zh": "未收录物品", "img": {"lib": "StoreItem.wil", "frame": 7}},
+      {"id": 1002, "name": "Untranslated Token", "zh": "测试标记", "img": {"lib": "StoreItem.wil", "frame": 8}},
+      {"id": 1001, "name": "Ghost Item", "zh": "鬼影物品", "img": {"lib": "StoreItem.wil", "frame": 8}}
+    ],
+    "monsters": [
+      {"id": 9, "name": "Pig", "zh": "猪", "level": 6, "img": {"lib": "Mon-34.wil", "frame": 40, "shape": 0}},
+      {"id": 189, "name": "Pig", "zh": "猪", "level": 0, "img": {"lib": "Mon-34.wil", "frame": 40, "shape": 0}},
+      {"id": 196, "name": "Pachon", "zh": "帕琼", "level": 0, "img": null},
+      {"id": 140, "name": "SummonPuppet", "zh": "召唤傀儡", "img": null},
+      {"id": 888, "name": "Unlisted Beast", "zh": "未列出怪物", "img": null}
+    ],
+    "npcs": [
+      {"id": 47, "name": "Maddox", "zh": "马多克斯", "icon": 27, "map": "3", "desc": "Weapon Refiner", "img": {"lib": "NPC.Zl", "frame": 2700, "shape": 27}, "face_img": {"lib": "NPCface.Zl", "frame": 27, "shape": 27}}
+    ],
+    "skills": [
+      {"id": 1, "name": "Swordsmanship", "zh": "基本剑术", "klass": "战士", "school": "Passive", "icon": "4", "img": {"lib": "MIcon.wil", "frame": 4}},
+      {"id": 2, "name": "Potion Mastery", "zh": "药水精通", "klass": "战士", "school": "Passive", "icon": "262", "img": {"lib": "MIcon.wil", "frame": 262}}
+    ],
+    "maps": [
+      {"id": 1, "name": "Bichon Town", "zh": "比奇城", "file": "0", "ver": ["zircon"]},
+      {"id": 900, "name": "Unlinked Map Data", "zh": "孤立地图", "file": "orphan", "ver": ["zircon"]}
+    ],
+    "ei_maps": [
+      {"name": "0.map", "w": 800, "h": 800},
+      {"name": "01_003.map", "w": 600, "h": 600},
+      {"name": "02_001.map", "w": 600, "h": 600}
+    ]
+  },
+  "provenance": {
+    "fixture": true,
+    "zircon": {"db_names_sha256": "fixture-sha256", "db_names_commit": "fixture-commit"},
+    "wiki": {"wiki_all_sha256": "fixture-wiki-all", "wiki_data_v2_sha256": "fixture-wiki-data"}
+  }
+}
