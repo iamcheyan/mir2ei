@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>名称审校 · EI 传奇3.0 百科</title>
+  <link rel="stylesheet" href="assets/zircon-audit.css?v=3">
+  <script src="scripts/zircon-audit.js?v=4" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav aria-label="主导航">
+      <a class="home-link" href="./index.html">EI 传奇3.0 百科</a>
+      <a href="./items.html">装备</a>
+      <a href="./monsters.html">怪物</a>
+      <a href="./npcs.html">NPC</a>
+      <a href="./skills.html">技能</a>
+      <a href="./maps.html">地图</a>
+      <a class="current" href="/zircon-audit.html" data-zircon-audit-nav>名称审校</a>
+    </nav>
+  </header>
+
+  <main class="audit-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">ZIRCON TRANSLATION CROSSWALK <span>·</span> EI 3.0</p>
+      <div class="hero-grid">
+        <div>
+          <h1 id="page-title">名称审校簿</h1>
+          <p class="hero-copy">逐条对照 Zircon 中文名与百科实体。名称不自动改写；相同译名只是候选证据，差异也不等于已判错。</p>
+        </div>
+        <div class="hero-mark" aria-hidden="true"><span>Z</span><i></i><span>EI</span></div>
+      </div>
+      <div class="hero-receipt" id="provenance" aria-live="polite">
+        <span class="receipt-state"><i></i> 正在读取证据快照</span>
+      </div>
+    </section>
+
+    <section class="category-section" aria-label="分类计数">
+      <div class="section-heading">
+        <div><p class="eyebrow">COVERAGE</p><h2>五类实体</h2></div>
+        <p>比较项可重叠；“已确认正确”仅来自人工审校。</p>
+      </div>
+      <div class="category-grid" id="category-stats" aria-live="polite"></div>
+    </section>
+
+    <section class="workbench" aria-label="名称审校记录">
+      <aside class="filters-panel">
+        <div class="filters-title">
+          <p class="eyebrow">REVIEW DESK</p>
+          <h2>筛选记录</h2>
+        </div>
+        <label class="field-label" for="search">名称、译名、编号或地图文件</label>
+        <input id="search" class="text-input" type="search" placeholder="例如 Afterlife、来世、1092" autocomplete="off">
+
+        <label class="field-label" for="category">类别</label>
+        <select id="category" class="select-input">
+          <option value="all">全部类别</option>
+          <option value="items">装备 / 道具</option>
+          <option value="monsters">怪物</option>
+          <option value="npcs">NPC</option>
+          <option value="magics">技能</option>
+          <option value="maps">地图</option>
+        </select>
+
+        <label class="field-label" for="status">机器筛查状态</label>
+        <select id="status" class="select-input"><option value="all">全部状态</option></select>
+
+        <label class="field-label" for="kind">记录类型</label>
+        <select id="kind" class="select-input">
+          <option value="all">全部记录</option>
+          <option value="system_entity">System.db 实体</option>
+          <option value="mapping_key">未链接汉化键</option>
+          <option value="wiki_entity">百科实体</option>
+          <option value="wiki_supplemental">地图补充记录</option>
+        </select>
+
+        <label class="field-label" for="review">人工审校状态</label>
+        <select id="review" class="select-input">
+          <option value="all">全部人工状态</option>
+          <option value="not_reviewed">尚未审校</option>
+          <option value="confirmed_correct">人工确认一致</option>
+          <option value="needs_correction">人工确认需修正</option>
+          <option value="insufficient_evidence">证据不足</option>
+        </select>
+
+        <div class="filter-actions">
+          <button id="clear-filters" class="button button-quiet" type="button">清除筛选</button>
+          <button id="export-reviews" class="button button-primary" type="button">导出本地审校</button>
+          <label class="button button-quiet import-button" for="import-reviews">导入审校 JSON</label>
+          <input id="import-reviews" type="file" accept="application/json,.json" hidden>
+        </div>
+        <p class="local-note">人工记录只保存在此浏览器。导出 JSON 可备份或移交；导入时校验数据版本。</p>
+        <p class="local-note review-message" id="review-message" role="status" aria-live="polite"></p>
+        <a class="data-download" href="data/zircon_name_audit.json" download>下载完整审计 JSON <span>↗</span></a>
+      </aside>
+
+      <div class="results-panel">
+        <div class="results-topline">
+          <div>
+            <p class="eyebrow">EVIDENCE QUEUE</p>
+            <h2>待核记录 <span id="result-count">—</span></h2>
+          </div>
+          <label class="page-size-label" for="page-size">每页
+            <select id="page-size" class="select-input compact-select">
+              <option value="25">25</option>
+              <option value="50" selected>50</option>
+              <option value="100">100</option>
+            </select>
+          </label>
+        </div>
+        <div class="result-list" id="results" aria-live="polite" aria-busy="true">
+          <div class="loading-card"><span class="loading-mark"></span><p>载入交叉索引与逐条证据…</p></div>
+        </div>
+        <nav class="pagination" id="pagination" aria-label="记录分页"></nav>
+      </div>
+    </section>
+
+    <footer class="audit-footer">
+      <p>身份匹配、译名比较、图片线索分开记录。网页或图片缺失表示当前静态快照无法验证，不推断源数据不存在。</p>
+      <a href="data/zircon_name_index.json">打开页面交叉索引</a>
+    </footer>
+  </main>
+  <noscript><p class="noscript">此审校页需要 JavaScript 读取静态 JSON；百科原页面不受影响。</p></noscript>
+</body>
+</html>

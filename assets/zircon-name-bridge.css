@@ -1,0 +1,26 @@
+.zircon-bridge-badge { display: flex; width: fit-content; max-width: 100%; flex-wrap: wrap; align-items: center; gap: 3px 8px; margin: 3px 0 2px; border-left: 2px solid #78d6cb; padding: 2px 7px; color: #99aab4; font: 10px/1.4 ui-monospace, "SFMono-Regular", Consolas, monospace; }
+.zircon-bridge-copy { overflow-wrap: anywhere; }
+.zircon-bridge-link { color: #e7bb72 !important; font: 10px/1.4 system-ui, sans-serif !important; white-space: nowrap; }
+.zircon-crosswalk { margin: 0 0 14px; border: 1px solid #34464d; border-radius: 8px; background: linear-gradient(100deg, #121e25, #151d20); color: #e8edf0; }
+.zircon-crosswalk-heading { display: flex; min-width: 0; align-items: center; gap: 10px; padding: 10px 13px; border-bottom: 1px solid #293a40; }
+.zircon-crosswalk-heading strong { font-size: 12px; font-weight: 600; }
+.zircon-crosswalk-mark { color: #e7bb72; font: 10px ui-monospace, "SFMono-Regular", Consolas, monospace; letter-spacing: .08em; }
+.zircon-crosswalk-open { margin-left: auto; color: #78d6cb; font-size: 11px; white-space: nowrap; }
+.zircon-crosswalk-rows { display: grid; }
+.zircon-crosswalk-row { display: grid; grid-template-columns: 72px minmax(90px, 1fr) minmax(100px, 1fr) auto auto; align-items: center; gap: 5px 10px; padding: 8px 13px; border-bottom: 1px solid #1f2e35; font-size: 11px; }
+.zircon-crosswalk-row:last-child { border-bottom: 0; }
+.zircon-crosswalk-id { color: #738791; font: 10px ui-monospace, "SFMono-Regular", Consolas, monospace; }
+.zircon-crosswalk-name { overflow-wrap: anywhere; color: #dce5e6; }
+.zircon-crosswalk-translation { overflow-wrap: anywhere; color: #b9dcd4; }
+.zircon-crosswalk-status { border: 1px solid #40525a; border-radius: 3px; padding: 2px 5px; color: #c2cfd1; font-size: 9px; }
+.zircon-crosswalk-status.status-conflict, .zircon-crosswalk-status.status-suspected_mismatch, .zircon-crosswalk-status.status-missing_translation { border-color: #704b43; color: #f1a395; }
+.zircon-crosswalk-status.status-translation_agreement_candidate { border-color: #365e55; color: #9bd8b6; }
+.zircon-crosswalk-more { margin: 0; padding: 8px 13px; color: #879aa2; font-size: 10px; }
+@media (max-width: 720px) {
+  .zircon-crosswalk-row { grid-template-columns: 63px minmax(0, 1fr); gap: 4px 8px; }
+  .zircon-crosswalk-translation { grid-column: 2; }
+  .zircon-crosswalk-status { justify-self: start; grid-column: 2; }
+  .zircon-crosswalk-row > .zircon-bridge-link { grid-column: 2; }
+  .zircon-crosswalk-heading { gap: 7px; padding: 9px; }
+  .zircon-crosswalk-open { font-size: 10px; }
+}

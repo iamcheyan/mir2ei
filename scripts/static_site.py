@@ -43,10 +43,11 @@ def fetch(base, path):
 
 def collect_detail_paths(base, port):
     """从数据文件推断详情页路径。"""
-    data_dir = "/tmp"
+    data_dir = os.environ.get("MIR2EI_DATA") or "/tmp"
     paths = set()
     try:
-        d = json.load(open(os.path.join(data_dir, "wiki_data_v2.json"), encoding="utf-8"))
+        with open(os.path.join(data_dir, "wiki_data_v2.json"), encoding="utf-8") as source:
+            d = json.load(source)
     except FileNotFoundError:
         return paths
     # 地图: ei_maps name
@@ -71,8 +72,12 @@ def collect_detail_paths(base, port):
     for q in d.get("quests", []):
         paths.add("/quest/" + urllib.parse.quote(q.get("name", "")))
     # 套装 (wiki_data_v2 无 sets; 从 wiki_all.json SetInfo)
+    all_path = os.path.join(data_dir, "wiki_all_fixed.json")
+    if not os.path.isfile(all_path):
+        all_path = os.path.join(data_dir, "wiki_all.json")
     try:
-        allj = json.load(open(os.path.join("/tmp", "wiki_all_fixed.json"), encoding="utf-8"))
+        with open(all_path, encoding="utf-8") as source:
+            allj = json.load(source)
         for s in allj.get("SetInfo", {}).get("rows", []):
             nm = s.get("SetName")
             if nm:
@@ -81,7 +86,8 @@ def collect_detail_paths(base, port):
         pass
     # 商店
     try:
-        st = json.load(open(os.path.join(data_dir, "wiki_stores.json"), encoding="utf-8"))
+        with open(os.path.join(data_dir, "wiki_stores.json"), encoding="utf-8") as source:
+            st = json.load(source)
         for i in range(len(st.get("stores", []))):
             paths.add(f"/store/{i}")
     except FileNotFoundError:
@@ -185,6 +191,11 @@ def main():
                     shutil.copy(os.path.join(bsrc, fn), os.path.join(bdst, fn))
                     n += 1
         print(f"  img: {n} files")
+
+    from integrate_zircon_names import integrate_site
+    source_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    result = integrate_site(source_root, out, args.base)
+    print("  Zircon audit: " + ", ".join(f"{key}={value}" for key, value in result.items()))
 
     print(f"Done -> {out}")
 

@@ -43,6 +43,19 @@ MIR2EI_DATA=$PWD/data python3 scripts/WikiServer.py --port 8777
 python3 scripts/static_site.py --port 8777 --out _site --base ""
 ```
 
+### Zircon 名称审校
+
+审校页 `zircon-audit.html` 将 `db_names.json` 的中日文键与 `wiki_all.json`、`wiki_data_v2.json`、静态详情页和图片做逐项交叉索引。生成器只读 Zircon 检出，不覆盖百科名称或源数据；名称归一化只作候选召回，百科译名一致也不会自动标为正确。
+
+```bash
+python3 scripts/build_zircon_name_audit.py --zircon-repo /path/to/zircon
+python3 scripts/integrate_zircon_names.py --source-root . --site-root . --base ""
+```
+
+`static_site.py` 会在生成 `_site` 后自动复制审校资源并加入导航。类别列表与实体页加载轻量交叉索引，原有英文名保留。人工结论和依据仅保存在当前浏览器；用“导出本地审校”备份，通过匹配同一数据指纹的 JSON 文件移交审校记录。
+
+运行测试：`python3 -m unittest discover -s tests -v`。
+
 ## 数据生成链路
 
 ```
